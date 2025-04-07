@@ -1,0 +1,10 @@
+<div class="cart">
+  <div *ngIf="cartItems.length === 0" class="cart-no-items-message">
+    <span>
+      Your cart is empty
+    </span>
+  </div>
+  @for (item of cartItems; track item.id){
+    <app-cart-item [item]="item"/>
+  }
+</div>

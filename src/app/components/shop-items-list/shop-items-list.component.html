@@ -1,0 +1,11 @@
+
+<div>
+  <span>
+    {{ title }}
+  </span>
+  <div class="items">
+    @for (item of shopItems; track item.id) {
+      <app-shop-item [item]="item" />
+    }
+  </div>
+</div>

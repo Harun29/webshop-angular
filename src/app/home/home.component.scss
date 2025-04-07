@@ -1,0 +1,45 @@
+.home{
+  font-family: 'Poppins', sans-serif;
+}
+
+.home div:nth-child(1){
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-family: 'Poppins', sans-serif;
+  .home-background{
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+    background-size: cover;
+    background-position: center;
+    object-fit: cover;
+    backdrop-filter: blur(20px);
+  }
+  .heading-container{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100vw;
+    flex-direction: column;
+    background: #00000011;
+    color: white;
+    backdrop-filter: blur(5px);
+    padding: 40px 0;
+    h1{
+      margin: 0;
+      font-size: 2.5rem;
+    }
+    span{
+      font-size: 1.2rem;
+      margin-top: 10px;
+    }
+  }
+}
+
+

@@ -1,0 +1,34 @@
+<div class="overlay" *ngIf="isExpanded"></div>
+<div class="navbar" [class.visible]="isVisible" appSwipeDown (swipeDown)="isExpanded && toggleCart()">
+  <div class="closed-navbar" *ngIf="!isExpanded">
+    <span>
+      <fa-icon [icon]="faShoppingBasket"></fa-icon>
+      {{totalItems()}}
+    </span>
+    <span>
+      ${{totalPrice().toFixed(2)}}
+    </span>
+  </div>
+  <div class="swipe-gesture" *ngIf="isExpanded"></div>
+  <span class="cart-header" *ngIf="isExpanded">Cart</span>
+  <app-cart *ngIf="isExpanded" [cartItems]="cartItems()"></app-cart>
+  <div class="cart-details" *ngIf="isExpanded">
+    <div class="total">
+      <span>Total:</span>
+      <span>${{totalPrice().toFixed(2)}}</span>
+    </div>
+    <div class="delivery">
+      <span>Delivery cost:</span>
+      <span>+ $12</span>
+    </div>
+  </div>
+  <div class="cart-container" [class.expanded]="isExpanded" (click)="!isExpanded && toggleCart()">
+    @if (isExpanded) {
+      <span>Checkout
+       <fa-icon [icon]="faArrowRight"></fa-icon>
+      </span>
+    } @else {
+      <fa-icon [icon]="faCartShopping"></fa-icon>
+    }
+  </div>
+</div>

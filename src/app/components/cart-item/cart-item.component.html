@@ -1,0 +1,21 @@
+<div class="cart-item">
+  <div class="cart-item-image">
+    <img src="{{item.image}}}" alt="item">
+  </div>
+  <div class="cart-item-description">
+    <h3>{{item.name}}</h3>
+    <span class="cart-item-price">${{item.price}}
+      <span>
+        x{{item.quantity}}
+      </span>
+    </span>
+  </div>
+  <div class="cart-item-amount">
+    <div (click)="addToCart()" class="operator">
+      <span>+</span>
+    </div>
+    <div (click)="removeFromCart()" class="operator">
+      <span>-</span>
+    </div>
+  </div>
+</div>

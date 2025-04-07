@@ -1,0 +1,17 @@
+<app-navbar />
+<div class="home">
+  <div>
+    <img src="/home-background.jpg" alt="Logo" class="home-background" />
+    <div class="heading-container">
+      <h1>
+        YOUR WEBSHOP
+      </h1>
+      <span>
+        Lorem ipsum dolor sit amet.
+      </span>
+    </div>
+  </div>
+  <app-shop-items-list [title]="'Shop For Accessories'" [shopItems]="shopItems().slice(0, 5)"></app-shop-items-list>
+  <app-shop-items-list [title]="'Shop For Electronics'" [shopItems]="shopItems().slice(5, 10)"></app-shop-items-list>
+  <app-footer />
+</div>

@@ -1,0 +1,13 @@
+.cart{
+  margin: 15px;
+  height: 500px;
+  overflow-y: scroll;
+  .cart-no-items-message{
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 1.2rem;
+    color: #333333;
+  }
+}

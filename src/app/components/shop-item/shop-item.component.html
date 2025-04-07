@@ -1,0 +1,10 @@
+<div class="item">
+  <div>
+    <img src="{{item.image}}" alt="shirt"/>
+    <h2>{{item.name}}</h2>
+  </div>
+  <div>
+    <span>{{item.price}}$</span>
+    <fa-icon [icon]="faCartPlus" (click)="addToCart()"></fa-icon>
+  </div>
+</div>
