@@ -11,6 +11,7 @@
   </div>
   <div class="swipe-gesture" *ngIf="isExpanded"></div>
   <span class="cart-header" *ngIf="isExpanded">Cart</span>
+  <!--  no close when swipe on cart items -->
   <app-cart *ngIf="isExpanded" [cartItems]="cartItems()"></app-cart>
   <div class="cart-details" *ngIf="isExpanded">
     <div class="total">

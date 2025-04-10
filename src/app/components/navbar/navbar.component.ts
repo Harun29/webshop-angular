@@ -4,7 +4,6 @@ import {faArrowRight, faCartShopping, faShoppingBasket} from '@fortawesome/free-
 import {CartService} from '../../services/cart.service';
 import {NgIf} from '@angular/common';
 import {CartComponent} from '../cart/cart.component';
-import {round} from '@popperjs/core/lib/utils/math';
 import {SwipeDownDirective} from '../../directives/swipe-down.directive';
 
 @Component({
@@ -39,13 +38,10 @@ export class NavbarComponent {
 
   toggleCart() {
     this.isExpanded = !this.isExpanded;
-    this.isVisible = true;
     if (this.isExpanded) {
       document.body.style.overflow = 'hidden';
     } else {
       document.body.style.overflow = '';
     }
   }
-
-  protected readonly round = round;
 }
