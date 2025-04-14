@@ -18,5 +18,4 @@ import {
 })
 export class CartComponent {
   @Input() cartItems: Array<CartItem> = [];
-//   testing remote
 }
