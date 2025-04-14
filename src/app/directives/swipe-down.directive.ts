@@ -30,6 +30,9 @@ export class SwipeDownDirective {
   @HostListener('touchend')
   onTouchEnd() {
     const deltaY = this.touchEndY - this.touchStartY;
+    this.touchEndY = 0;
+    this.touchStartY = 0;
+    console.log("delta y", deltaY);
 
     if (deltaY > 100) {
       // Emit swipeDown event if the swipe threshold is met
