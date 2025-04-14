@@ -1,0 +1,46 @@
+<div class="checkout-delivery">
+  <span class="delivery-section">Delivery Address</span>
+  <div class="addresses">
+    <div class="add-address">
+      <fa-icon [icon]="faPlus" />
+    </div>
+    <div class="address">
+      <span>Hans Egedsvej 29</span>
+      <span>P.O. Box 1615</span>
+      <span>3900 Nuuk</span>
+      <span>Greenland</span>
+      <span class="checked-address">
+        Delivery Address
+        <fa-icon [icon]="faCheckCircle"/>
+      </span>
+    </div>
+    <div class="address">
+      <span>Hans Egedsvej 29</span>
+      <span>P.O. Box 1615</span>
+      <span>3900 Nuuk</span>
+      <span>Greenland</span>
+      <span class="checked-address">
+        Delivery Address
+        <fa-icon [icon]="faCheckCircle"/>
+      </span>
+    </div>
+  </div>
+  <span class="delivery-section">Order Summary</span>
+  @for (item of items; track item.id) {
+    <div class="order-summary">
+      <div class="white-line"></div>
+      <div class="order-item-detail">
+        <span class="name">
+
+          {{item.name}}
+        </span>
+          <span class="qty">
+            Qty:{{item.quantity}}
+          </span>
+          <span class="price">
+            ${{item.price}}
+          </span>
+      </div>
+    </div>
+  }
+</div>

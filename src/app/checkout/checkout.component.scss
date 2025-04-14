@@ -1,0 +1,65 @@
+.checkout{
+  font-family: 'Poppins', sans-serif;
+  height: calc(100vh - 4rem);
+  padding: 2rem 1rem;
+  display: grid;
+  grid-template-rows: auto 1fr auto;
+  header{
+
+    .back{
+      display: flex;
+      font-size: 1.5rem;
+      fa-icon{
+        margin-right: 1rem;
+      }
+    }
+
+    .steps{
+      margin: 16px 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 1rem;
+
+      fa-icon{
+        margin-right: .5rem;
+      }
+    }
+  }
+
+  main{
+    border-radius: 8px;
+    background: #f5f5f5;
+    box-shadow: inset 46px 46px 92px #e9e9e9,
+    inset -46px -46px 92px #ffffff;
+  }
+
+  footer{
+    padding: 1rem 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    .total{
+      font-size: 1.5rem;
+
+      span{
+        color: #666666;
+      }
+    }
+
+    button{
+      font-size: 1rem;
+      height: 60px;
+      padding: 0 44px;
+      border-radius: 30px;
+      text-wrap: nowrap;
+      color: #220DFA;
+      background: transparent;
+      border: none;
+      -webkit-box-shadow: 10px 14px 36px -14px rgba(0,0,0,0.54);
+      -moz-box-shadow: 10px 14px 36px -14px rgba(0,0,0,0.54);
+      box-shadow: 10px 14px 36px -14px rgba(0,0,0,0.54);
+    }
+  }
+}

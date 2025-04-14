@@ -5,6 +5,7 @@ import {CartService} from '../../services/cart.service';
 import {NgIf} from '@angular/common';
 import {CartComponent} from '../cart/cart.component';
 import {SwipeDownDirective} from '../../directives/swipe-down.directive';
+import {RouterLink} from '@angular/router';
 
 @Component({
   selector: 'app-navbar',
@@ -12,7 +13,8 @@ import {SwipeDownDirective} from '../../directives/swipe-down.directive';
     FaIconComponent,
     NgIf,
     CartComponent,
-    SwipeDownDirective
+    SwipeDownDirective,
+    RouterLink
   ],
   templateUrl: './navbar.component.html',
   styleUrl: './navbar.component.scss'

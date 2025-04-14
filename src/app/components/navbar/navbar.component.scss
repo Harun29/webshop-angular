@@ -15,7 +15,7 @@
   flex-direction: column;
   font-family: 'Poppins', sans-serif;
   position: fixed;
-  bottom: 8px;
+  bottom: 0;
   transform: translateY(170%);
   z-index: 20;
   color: white;
@@ -24,6 +24,9 @@
   transition: 0.1s;
   width: calc(100vw - 30px);
   border-radius: 20px 20px 0 0;
+  -webkit-box-shadow: -5px -9px 26px -9px rgba(117,108,117,1);
+  -moz-box-shadow: -5px -9px 26px -9px rgba(117,108,117,1);
+  box-shadow: -5px -9px 26px -9px rgba(117,108,117,1);
 
   &.visible {
     transform: translateY(0%);
@@ -53,16 +56,20 @@
     justify-content: center;
     padding: 1rem;
     font-size: 1.5rem;
-    background: #220DFA;
+    background: rgba( 34, 13, 250, 0.70 );
+    backdrop-filter: blur( 20px );
+    -webkit-backdrop-filter: blur( 20px );
+    border: 1px solid rgba( 255, 255, 255, 0.18 );
     border-radius: 100%;
     position: absolute;
     top: 0;
     right: 50%;
     transform: translate(50%, -50%);
-    transition: width 0.3s, margin-top 0.3s, border-radius 0.3s;
+    transition: width 0.3s, margin-top 0.3s, border 0.3s, background 0.3s, color 0.3s;
+
 
     &.expanded{
-      margin-top: 15px;
+      margin: 15px;
       position: relative;
       height: 30px;
       width: calc(100% - 30px);
@@ -71,7 +78,11 @@
       top: auto;
       right: auto;
       text-wrap: nowrap;
-
+      color: #220DFA;
+      background: transparent;
+      -webkit-box-shadow: 9px 10px 26px -9px rgba(117,108,117,1);
+      -moz-box-shadow: 9px 10px 26px -9px rgba(117,108,117,1);
+      box-shadow: 9px 10px 26px -9px rgba(117,108,117,1);
       span{
         font-size: 1.2rem;
       }
@@ -122,4 +133,3 @@
     }
   }
 }
-

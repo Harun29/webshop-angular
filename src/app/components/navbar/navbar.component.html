@@ -11,7 +11,6 @@
   </div>
   <div class="swipe-gesture" *ngIf="isExpanded"></div>
   <span class="cart-header" *ngIf="isExpanded">Cart</span>
-  <!--  no close when swipe on cart items -->
   <app-cart *ngIf="isExpanded" [cartItems]="cartItems()"></app-cart>
   <div class="cart-details" *ngIf="isExpanded">
     <div class="total">
@@ -23,7 +22,7 @@
       <span>+ $12</span>
     </div>
   </div>
-  <div class="cart-container" [class.expanded]="isExpanded" (click)="!isExpanded && toggleCart()">
+  <div class="cart-container" [class.expanded]="isExpanded" (click)="!isExpanded && toggleCart()" [routerLink]="isExpanded ? '/checkout' : null">
     @if (isExpanded) {
       <span>Checkout
        <fa-icon [icon]="faArrowRight"></fa-icon>
