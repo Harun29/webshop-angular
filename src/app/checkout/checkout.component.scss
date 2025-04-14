@@ -21,6 +21,26 @@
       align-items: center;
       gap: 1rem;
 
+      .delivery{
+        color: lawngreen;
+        &.active{
+          color: #000;
+          fa-icon{
+            color: #220DFA;
+          }
+        }
+      }
+
+      .payment{
+        color: #777777;
+        &.active{
+          color: #000;
+          fa-icon{
+            color: #220DFA;
+          }
+        }
+      }
+
       fa-icon{
         margin-right: .5rem;
       }
@@ -42,14 +62,14 @@
 
     .total{
       font-size: 1.5rem;
-
       span{
         color: #666666;
       }
     }
 
     button{
-      font-size: 1rem;
+      font-size: 1.2rem;
+      font-weight: 500;
       height: 60px;
       padding: 0 44px;
       border-radius: 30px;
@@ -57,9 +77,14 @@
       color: #220DFA;
       background: transparent;
       border: none;
-      -webkit-box-shadow: 10px 14px 36px -14px rgba(0,0,0,0.54);
-      -moz-box-shadow: 10px 14px 36px -14px rgba(0,0,0,0.54);
-      box-shadow: 10px 14px 36px -14px rgba(0,0,0,0.54);
+      -webkit-box-shadow: 10px 14px 16px -14px rgba(0,0,0,0.54);
+      -moz-box-shadow: 10px 14px 16px -14px rgba(0,0,0,0.54);
+      box-shadow: 10px 14px 16px -14px rgba(0,0,0,0.54);
+
+      &.payment{
+        background: limegreen;
+        color: #fff;
+      }
     }
   }
 }

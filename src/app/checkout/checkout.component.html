@@ -5,11 +5,15 @@
       <span>Checkout</span>
     </div>
     <div class="steps">
-      <div class="delivery">
-        <fa-icon [icon]="faArrowCircleRight" />
+      <div class="delivery" [class.active]="isOnDelivery()">
+        @if (isOnDelivery()) {
+          <fa-icon [icon]="faArrowCircleRight" />
+        } @else {
+          <fa-icon [icon]="faCircleCheck" />
+        }
         <span>Delivery</span>
       </div>
-      <div class="payment">
+      <div class="payment" [class.active]="!isOnDelivery()">
         <fa-icon [icon]="faArrowCircleRight" />
         <span>Payment</span>
       </div>
@@ -17,16 +21,25 @@
   </header>
 
   <main>
-    <app-checkout-delivery [items]="cartItems()"/>
+    @if (isOnDelivery()){
+      <app-checkout-delivery [items]="cartItems()"/>
+    }@else{
+      <app-checkout-payment />
+    }
   </main>
 
   <footer>
     <div class="total">
       <span>${{totalPrice()}}</span>
     </div>
-    <button>
-      Confirm
-      <fa-icon [icon]="faCheck" />
+    <button (click)="changeToPayment()" [class.payment]="!isOnDelivery()">
+      @if (isOnDelivery()){
+        Confirm
+        <fa-icon [icon]="faCheck" />
+      }@else{
+        Proceed
+        <fa-icon [icon]="faArrowRight" />
+      }
     </button>
   </footer>
 
