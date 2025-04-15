@@ -2,7 +2,9 @@ import {Address} from 'node:cluster';
 
 export type User = {
   id: number;
-  name: string;
+  firstName: string;
+  lastName: string;
+  userName: string;
   email: string;
   phone: string;
   addresses: Address[];

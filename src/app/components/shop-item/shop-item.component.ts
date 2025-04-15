@@ -16,7 +16,7 @@ export class ShopItemComponent {
   protected readonly faCartPlus = faCartPlus;
   @Input() item!: Item;
 
-  constructor(private cartService: CartService) {
+  constructor(private readonly cartService: CartService) {
   }
 
   addToCart() {

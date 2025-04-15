@@ -8,13 +8,13 @@ import { CartItem } from '../models/cart-item.model';
 })
 export class CartService {
   private readonly CART_STORAGE_KEY = 'cartItems';
-  private isBrowser: boolean;
+  private readonly isBrowser: boolean;
 
   public cartItems = signal<CartItem[]>([]);
   public totalItems = signal(0);
   public totalPrice = signal(0);
 
-  constructor(@Inject(PLATFORM_ID) private platformId: Object) {
+  constructor(@Inject(PLATFORM_ID) private readonly platformId: Object) {
     this.isBrowser = isPlatformBrowser(this.platformId);
     if (this.isBrowser) {
       this.cartItems.set(this.loadCartItems());

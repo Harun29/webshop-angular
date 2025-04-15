@@ -9,7 +9,7 @@ export class SwipeDownDirective {
   private touchStartY = 0;
   private touchEndY = 0;
 
-  constructor(private el: ElementRef) {}
+  constructor(private readonly el: ElementRef) {}
 
   @HostListener('touchstart', ['$event'])
   onTouchStart(event: TouchEvent) {

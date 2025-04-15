@@ -19,7 +19,7 @@ import {NavbarComponent} from '../components/navbar/navbar.component';
 export class HomeComponent {
 
   shopItems = signal<Array<Item>>([]);
-  private itemsService = inject(ItemsService);
+  private readonly itemsService = inject(ItemsService);
 
   ngOnInit() {
     this.itemsService.getItemsFromApi()
