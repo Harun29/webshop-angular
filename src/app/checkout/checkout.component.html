@@ -30,7 +30,8 @@
 
   <footer>
     <div class="total">
-      <span>${{totalPrice()}}</span>
+      Total:
+      <span>${{totalPrice().toFixed(2)}}</span>
     </div>
     <button (click)="changeToPayment()" [class.payment]="!isOnDelivery()">
       @if (isOnDelivery()){
