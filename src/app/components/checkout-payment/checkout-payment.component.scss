@@ -1,0 +1,58 @@
+.checkout-payment{
+  display: grid;
+  padding: 1rem 0 1rem 1rem;
+  grid-template-rows: auto auto auto 1fr;
+
+  .payment-section{
+    font-size: 1.2rem;
+    font-weight: 500;
+    margin-bottom: 1rem;
+  }
+
+  .payment-methods{
+    border-radius: 10px;
+    overflow: hidden;
+
+    .method{
+      height: 100px;
+      background: #fff;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 2rem;
+
+      .circle{
+        border: 2px solid #777777;
+        border-radius: 50%;
+        height: 1rem;
+        aspect-ratio: 1/1;
+      }
+
+      &.active{
+        background: #3C74FE;
+        color: #fff;
+        border-radius: 10px;
+        position: relative;
+        overflow: hidden;
+
+        fa-icon{
+          font-size: 1.2rem;
+        }
+
+        .bg-icon{
+          font-size: 4rem;
+          color: #220DFA;
+          position: absolute;
+          align-items: end;
+          bottom: 0;
+          right: 20%;
+
+          &.rotate{
+            transform: rotate(60deg);
+            bottom: -40%;
+          }
+        }
+      }
+    }
+  }
+}

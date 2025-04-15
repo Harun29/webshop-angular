@@ -21,7 +21,6 @@ export class SwipeDownDirective {
     this.touchEndY = event.touches[0].clientY;
     const deltaY = this.touchEndY - this.touchStartY;
 
-    // Optionally move the element during swipe
     if (deltaY > 0) {
       this.el.nativeElement.style.transform = `translateY(${deltaY}px)`;
     }
@@ -35,11 +34,9 @@ export class SwipeDownDirective {
     console.log("delta y", deltaY);
 
     if (deltaY > 100) {
-      // Emit swipeDown event if the swipe threshold is met
       this.swipeDown.emit();
       this.el.nativeElement.style.transform = 'translateY(0)';
     } else {
-      // Reset position if swipe is not enough
       this.el.nativeElement.style.transition = 'transform 0.3s ease';
       this.el.nativeElement.style.transform = 'translateY(0)';
       setTimeout(() => {

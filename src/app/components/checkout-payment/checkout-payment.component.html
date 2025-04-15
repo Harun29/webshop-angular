@@ -1,1 +1,41 @@
-<p>checkout-payment works!</p>
+<div class="checkout-payment">
+  <span class="payment-section">Payment Methods</span>
+  <div class="payment-methods">
+    <div
+      class="method"
+      [class.active]="selectedPaymentMethod() === PaymentMethod.CreditCard"
+      (click)="changePaymentMethod(PaymentMethod.CreditCard)">
+      <span>Credit Card</span>
+      @if (selectedPaymentMethod() === PaymentMethod.CreditCard) {
+        <fa-icon [icon]="faCircleCheck"/>
+        <fa-icon class="bg-icon rotate" [icon]="faCreditCard" />
+      }@else{
+        <div class="circle"></div>
+      }
+    </div>
+    <div
+      class="method"
+      [class.active]="selectedPaymentMethod() === PaymentMethod.PayPal"
+      (click)="changePaymentMethod(PaymentMethod.PayPal)">
+      <span>PayPal</span>
+      @if (selectedPaymentMethod() === PaymentMethod.PayPal) {
+        <fa-icon [icon]="faCircleCheck"/>
+        <fa-icon class="bg-icon" [icon]="faPaypal" />
+      }@else{
+        <div class="circle"></div>
+      }
+    </div>
+    <div
+      class="method"
+      [class.active]="selectedPaymentMethod() === PaymentMethod.BankTransfer"
+      (click)="changePaymentMethod(PaymentMethod.BankTransfer)">
+      <span>Bank Transfer</span>
+      @if (selectedPaymentMethod() === PaymentMethod.BankTransfer) {
+        <fa-icon [icon]="faCircleCheck"/>
+        <fa-icon class="bg-icon" [icon]="faBank" />
+      }@else{
+        <div class="circle"></div>
+      }
+    </div>
+  </div>
+</div>
