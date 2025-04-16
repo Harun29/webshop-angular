@@ -22,7 +22,7 @@ import {ProfileComponent} from '../components/profile/profile.component';
 export class HomeComponent {
 
   shopItems = signal<Array<Item>>([]);
-  selectedPage = signal<pages>(pages.HOME);
+  selectedPage = signal<pages>(pages.PROFILE);
   private readonly itemsService = inject(ItemsService);
   protected readonly pages = pages;
 
