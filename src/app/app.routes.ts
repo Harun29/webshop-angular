@@ -10,5 +10,10 @@ export const routes: Routes = [
     path: 'checkout',
     pathMatch: 'full',
     loadComponent: () => import('./checkout/checkout.component').then(m => m.CheckoutComponent),
+  },
+  {
+    path: 'profile',
+    pathMatch: 'full',
+    loadComponent: () => import('./components/profile/profile.component').then(m => m.ProfileComponent),
   }
 ];
