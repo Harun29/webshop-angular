@@ -127,13 +127,40 @@
   .closed-navbar{
     display: flex;
     align-items: center;
+    padding: 0 3rem;
     justify-content: space-between;
     font-size: 2.5rem;
-    width: 100%;
+    width: calc(100vw - 6rem);
 
-    span{
+    .active-indicator {
+      position: absolute;
+      height: 100%;
+      width: 8rem;
+      bottom: 0;
+      left: 0;
+      border-radius: 20px 0 0 0;
+      background: #3C74FEB3;
+      background: linear-gradient(90deg, rgba(60, 116, 254, 1) 0%, rgba(255, 255, 255, 1) 100%);
+      transition: left 0.3s ease, right 0.3s ease, border-radius 0.3s ease;
+
+      &.profile {
+        left: calc(100% - 8rem);
+        right: unset;
+        border-radius: 0 20px 0 0;
+        background: linear-gradient(270deg, rgba(60, 116, 254, 1) 0%, rgba(255, 255, 255, 1) 100%);
+      }
+    }
+
+    .navigate-icon{
       font-size: 1.5rem;
       color: #3C74FE;
+      z-index: 10;
+      transition: color 0.3s ease;
+
+      &.active{
+        color: #fff;
+      }
     }
+
   }
 }

@@ -5,7 +5,7 @@
       <span>Checkout</span>
     </div>
     <div class="steps">
-      <div class="delivery" [class.active]="isOnDelivery()">
+      <div (click)="changeToDelivery()" class="delivery" [class.active]="isOnDelivery()" [class.done]="isOnPayment()">
         @if (isOnDelivery()) {
           <fa-icon [icon]="faArrowCircleRight" />
         } @else {
@@ -13,7 +13,7 @@
         }
         <span>Delivery</span>
       </div>
-      <div class="payment" [class.active]="!isOnDelivery()">
+      <div class="payment" [class.active]="isOnPayment()">
         <fa-icon [icon]="faArrowCircleRight" />
         <span>Payment</span>
       </div>
@@ -33,7 +33,7 @@
       Total:
       <span>${{totalPrice().toFixed(2)}}</span>
     </div>
-    <button (click)="changeToPayment()" [class.payment]="!isOnDelivery()">
+    <button (click)="changeToPayment()" [class.payment]="isOnPayment()">
       @if (isOnDelivery()){
         Confirm
         <fa-icon [icon]="faCheck" />

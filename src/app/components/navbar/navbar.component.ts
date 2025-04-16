@@ -1,11 +1,14 @@
-import {Component, HostListener, inject} from '@angular/core';
+import {Component, HostListener, inject, output, signal} from '@angular/core';
 import {FaIconComponent} from '@fortawesome/angular-fontawesome';
-import {faArrowRight, faCartShopping, faShoppingBasket} from '@fortawesome/free-solid-svg-icons';
+import {faArrowRight, faCartShopping} from '@fortawesome/free-solid-svg-icons';
 import {CartService} from '../../services/cart.service';
-import {NgIf} from '@angular/common';
+import {NgClass, NgIf} from '@angular/common';
 import {CartComponent} from '../cart/cart.component';
 import {SwipeDownDirective} from '../../directives/swipe-down.directive';
 import {RouterLink} from '@angular/router';
+import {faHouse} from '@fortawesome/free-solid-svg-icons/faHouse';
+import {faUser} from '@fortawesome/free-solid-svg-icons/faUser';
+import {pages} from '../../models/pages.model';
 
 @Component({
   selector: 'app-navbar',
@@ -14,21 +17,28 @@ import {RouterLink} from '@angular/router';
     NgIf,
     CartComponent,
     SwipeDownDirective,
-    RouterLink
+    RouterLink,
+    NgClass
   ],
   templateUrl: './navbar.component.html',
   styleUrl: './navbar.component.scss'
 })
 export class NavbarComponent {
+
+  protected readonly pages = pages;
+
   isVisible = false;
   isExpanded = false;
   cartService = inject(CartService);
-  totalItems = this.cartService.totalItems;
+  pageToggled = output<pages>();
+  selectedPage = signal<pages>(pages.HOME);
+
   totalPrice = this.cartService.totalPrice;
   cartItems = this.cartService.cartItems;
   protected readonly faCartShopping = faCartShopping;
-  protected readonly faShoppingBasket = faShoppingBasket;
   protected readonly faArrowRight = faArrowRight;
+  protected readonly faHouse = faHouse;
+  protected readonly faUser = faUser;
 
   constructor() {}
 
@@ -46,4 +56,10 @@ export class NavbarComponent {
       document.body.style.overflow = '';
     }
   }
+
+  togglePage(page: pages) {
+    this.selectedPage.set(page);
+    this.pageToggled.emit(page);
+  }
+
 }

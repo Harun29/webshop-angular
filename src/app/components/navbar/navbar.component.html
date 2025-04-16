@@ -1,13 +1,13 @@
 <div class="overlay" *ngIf="isExpanded"></div>
 <div class="navbar" [class.visible]="isVisible" appSwipeDown (swipeDown)="isExpanded && toggleCart()">
   <div class="closed-navbar" *ngIf="!isExpanded">
-    <span>
-      <fa-icon [icon]="faShoppingBasket"></fa-icon>
-      {{totalItems()}}
-    </span>
-    <span>
-      ${{totalPrice().toFixed(2)}}
-    </span>
+    <div class="active-indicator" [ngClass]="selectedPage()===pages.HOME ? 'home' : 'profile'"></div>
+    <div class="navigate-icon" (click)="togglePage(pages.HOME)" [class.active]="selectedPage() === pages.HOME">
+      <fa-icon [icon]="faHouse" />
+    </div>
+    <div class="navigate-icon" (click)="togglePage(pages.PROFILE)" [class.active]="selectedPage() === pages.PROFILE">
+      <fa-icon [icon]="faUser" />
+    </div>
   </div>
   <div class="swipe-gesture" *ngIf="isExpanded"></div>
   <span class="cart-header" *ngIf="isExpanded">Cart</span>

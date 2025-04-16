@@ -27,6 +27,7 @@ export class CheckoutComponent {
   protected readonly faCheck = faCheck;
   protected readonly faCircleCheck = faCircleCheck;
   isOnDelivery = signal(true);
+  isOnPayment = signal(false);
 
   cartService = inject(CartService);
   totalPrice = this.cartService.totalPrice;
@@ -34,10 +35,12 @@ export class CheckoutComponent {
 
   changeToPayment() {
     this.isOnDelivery.set(false);
+    this.isOnPayment.set(true);
   }
 
   changeToDelivery() {
     this.isOnDelivery.set(true);
+    this.isOnPayment.set(false);
   }
 
 }
