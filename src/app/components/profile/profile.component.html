@@ -18,7 +18,34 @@
         Addresses</button>
     </div>
     <div class="settings-content">
-
+      <label>Full Name</label>
+      @if (profileEditMode){
+        <input type="text" placeholder="Max Verstappen" />
+      }@else{
+        <span>Max Verstappen</span>
+      }
+      <label>Username</label>
+      @if (profileEditMode){
+        <input type="text" placeholder="maxverstappen" />
+      }@else{
+        <span>maxverstappen</span>
+      }
+      <label>Email</label>
+      @if (profileEditMode){
+        <input type="email" placeholder="max.verstappen@redbull.com" />
+      }@else{
+        <span>max.verstappen{{"@"}}redbull.com</span>
+      }
+      <label>Phone</label>
+      @if (profileEditMode){
+        <input type="tel" placeholder="+31 6 12345678" />
+      }@else{
+        <span>+31 6 12345678</span>
+      }
+      <button (click)="toggleProfileEditMode()">
+        <fa-icon [icon]="faPencil" />
+        Toggle Edit
+      </button>
     </div>
   </div>
   <div class="past-orders">
