@@ -22,7 +22,7 @@
 
   <main>
     @if (isOnDelivery()){
-      <app-checkout-delivery [items]="cartItems()"/>
+      <app-checkout-delivery [items]="cartItems()" [addresses]="addresses"/>
     }@else{
       <app-checkout-payment />
     }

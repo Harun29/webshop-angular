@@ -4,22 +4,18 @@
     <div class="add-address">
       <fa-icon [icon]="faPlus" />
     </div>
-    <div class="address">
-      <span>Hans Egedsvej 29</span>
-      <span>P.O. Box 1615</span>
-      <span>3900 Nuuk</span>
-      <span>Greenland</span>
-      <span class="checked-address">
-        Delivery Address
-        <fa-icon [icon]="faCheckCircle"/>
-      </span>
-    </div>
-    <div class="address">
-      <span>Hans Egedsvej 29</span>
-      <span>P.O. Box 1615</span>
-      <span>3900 Nuuk</span>
-      <span>Greenland</span>
-    </div>
+    @for(address of addresses; track address.id) {
+      <div class="address" (click)="setSelectAddress(address)">
+        <span>{{address.address}}</span>
+        <span>{{address.postalCode + ' ' +  address.city}}</span>
+        <span>{{address.country}}</span>
+
+        <span *ngIf="selectedAddress.id === address.id" class="checked-address">
+          Delivery Address
+          <fa-icon [icon]="faCheckCircle"/>
+        </span>
+      </div>
+    }
   </div>
   <span class="delivery-section">Order Summary</span>
   @for (item of items; track item.id) {

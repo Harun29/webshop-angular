@@ -9,7 +9,7 @@
     </div>
   </div>
   <div class="settings">
-    <div class="buttons">
+    <div class="nav-buttons">
       <button>
         <fa-icon [icon]="faInfo" />
         Your Info</button>
@@ -17,45 +17,7 @@
         <fa-icon [icon]="faAddressCard" />
         Addresses</button>
     </div>
-    <div class="settings-content">
-      <label>Full Name</label>
-      @if (profileEditMode){
-        <input type="text" placeholder="{{user?.firstName + ' ' + user?.lastName}}" />
-      }@else{
-        <span>{{user?.firstName + " " + user?.lastName}}</span>
-      }
-      <label>Username</label>
-      @if (profileEditMode){
-        <input type="text" placeholder="{{user?.userName}}" />
-      }@else{
-        <span>{{user?.userName}}</span>
-      }
-      <label>Email</label>
-      @if (profileEditMode){
-        <input type="email" placeholder="{{user?.email}}" />
-      }@else{
-        <span>{{user?.email}}</span>
-      }
-      <label>Phone</label>
-      @if (profileEditMode){
-        <input type="tel" placeholder="{{user?.phone}}" />
-      }@else{
-        <span>{{user?.phone}}</span>
-      }
-      <div class="buttons">
-        <button [class.toggled]="profileEditMode" (click)="toggleProfileEditMode()">
-          <fa-icon *ngIf="profileEditMode" [icon]="faX" />
-          <fa-icon *ngIf="!profileEditMode" [icon]="faPencil" />
-          {{profileEditMode ? 'Cancel' : 'Edit'}}
-        </button>
-        @if(profileEditMode){
-          <button>
-            <fa-icon [icon]="faSave" />
-            Save
-          </button>
-        }
-      </div>
-    </div>
+    <app-profile-info [user]="user"/>
   </div>
   <div class="past-orders">
     <span>Past orders</span>
