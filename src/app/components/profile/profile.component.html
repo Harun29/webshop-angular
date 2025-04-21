@@ -1,7 +1,7 @@
 <div class="profile">
   <div class="user-info">
     <div class="name-and-heading">
-      <span>Hello, Max</span>
+      <span>Hello, {{user?.firstName}}</span>
       <h3>Manage your profile from here</h3>
     </div>
     <div class="avatar">
@@ -20,27 +20,27 @@
     <div class="settings-content">
       <label>Full Name</label>
       @if (profileEditMode){
-        <input type="text" placeholder="Max Verstappen" />
+        <input type="text" placeholder="{{user?.firstName + ' ' + user?.lastName}}" />
       }@else{
-        <span>Max Verstappen</span>
+        <span>{{user?.firstName + " " + user?.lastName}}</span>
       }
       <label>Username</label>
       @if (profileEditMode){
-        <input type="text" placeholder="maxverstappen" />
+        <input type="text" placeholder="{{user?.userName}}" />
       }@else{
-        <span>maxverstappen</span>
+        <span>{{user?.userName}}</span>
       }
       <label>Email</label>
       @if (profileEditMode){
-        <input type="email" placeholder="max.verstappen@redbull.com" />
+        <input type="email" placeholder="{{user?.email}}" />
       }@else{
-        <span>max.verstappen{{"@"}}redbull.com</span>
+        <span>{{user?.email}}</span>
       }
       <label>Phone</label>
       @if (profileEditMode){
-        <input type="tel" placeholder="+31 6 12345678" />
+        <input type="tel" placeholder="{{user?.phone}}" />
       }@else{
-        <span>+31 6 12345678</span>
+        <span>{{user?.phone}}</span>
       }
       <div class="buttons">
         <button [class.toggled]="profileEditMode" (click)="toggleProfileEditMode()">
