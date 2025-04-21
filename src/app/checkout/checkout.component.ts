@@ -8,6 +8,8 @@ import {CartService} from '../services/cart.service';
 import {RouterLink} from '@angular/router';
 import {faCircleCheck} from '@fortawesome/free-solid-svg-icons/faCircleCheck';
 import {CheckoutPaymentComponent} from '../components/checkout-payment/checkout-payment.component';
+import {UserService} from '../services/user.service';
+import {Address} from '../models/address.model';
 
 @Component({
   selector: 'app-checkout',
@@ -28,6 +30,15 @@ export class CheckoutComponent {
   protected readonly faCircleCheck = faCircleCheck;
   isOnDelivery = signal(true);
   isOnPayment = signal(false);
+
+  userService = inject(UserService);
+  addresses: Address[] = [];
+
+  ngOnInit() {
+    this.userService.getAddresses().subscribe((data) => {
+      this.addresses = data;
+    })
+  }
 
   cartService = inject(CartService);
   totalPrice = this.cartService.totalPrice;

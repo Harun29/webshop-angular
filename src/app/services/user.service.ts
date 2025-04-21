@@ -47,4 +47,8 @@ export class UserService {
 
     return of(mockUser);
   }
+
+  getAddresses(): Observable<Address[]> {
+    return of(this.addresses);
+  }
 }
