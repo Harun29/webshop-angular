@@ -4,11 +4,15 @@ import {faUser} from '@fortawesome/free-solid-svg-icons/faUser';
 import {faInfo} from '@fortawesome/free-solid-svg-icons/faInfo';
 import {faAddressCard} from '@fortawesome/free-solid-svg-icons/faAddressCard';
 import {faPencil} from '@fortawesome/free-solid-svg-icons/faPencil';
+import {faSave} from '@fortawesome/free-solid-svg-icons';
+import {faX} from '@fortawesome/free-solid-svg-icons/faX';
+import {NgIf} from '@angular/common';
 
 @Component({
   selector: 'app-profile',
   imports: [
-    FaIconComponent
+    FaIconComponent,
+    NgIf
   ],
   templateUrl: './profile.component.html',
   styleUrl: './profile.component.scss'
@@ -27,5 +31,6 @@ export class ProfileComponent {
   }
 
 
-
+  protected readonly faSave = faSave;
+  protected readonly faX = faX;
 }

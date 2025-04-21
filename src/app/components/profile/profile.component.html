@@ -42,10 +42,19 @@
       }@else{
         <span>+31 6 12345678</span>
       }
-      <button (click)="toggleProfileEditMode()">
-        <fa-icon [icon]="faPencil" />
-        Toggle Edit
-      </button>
+      <div class="buttons">
+        <button [class.toggled]="profileEditMode" (click)="toggleProfileEditMode()">
+          <fa-icon *ngIf="profileEditMode" [icon]="faX" />
+          <fa-icon *ngIf="!profileEditMode" [icon]="faPencil" />
+          {{profileEditMode ? 'Cancel' : 'Edit'}}
+        </button>
+        @if(profileEditMode){
+          <button>
+            <fa-icon [icon]="faSave" />
+            Save
+          </button>
+        }
+      </div>
     </div>
   </div>
   <div class="past-orders">
