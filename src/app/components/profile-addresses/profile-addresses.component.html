@@ -1,13 +1,38 @@
-<div class="addresses">
-  @for(address of addresses; track address.id) {
-    <div class="address">
-      <span class="address-name">Address {{address.id}}</span>
-      <span>{{address.address}}</span>
-      <span>{{address.postalCode + ' ' + address.city}}</span>
-      <span>{{address.country}}</span>
+<div class="addresses" [class.editToggled]="editToggled()">
+  @if(!editToggled()){@for(address of addresses; track address.id) {
+    <div class="address" (click)="editAddress(address)">
+      <span class="address-name">Address {{ address.id }}</span>
+      <span>{{ address.address }}</span>
+      <span>{{ address.postalCode + ' ' + address.city }}</span>
+      <span>{{ address.country }}</span>
+      <fa-icon class="edit-icon" [icon]="faEdit"/>
+    </div>
+    }
+    <div class="address add">
+      <fa-icon [icon]="faPlus" />
+    </div>}
+  @else{
+    <label>ADDRESS</label>
+    <input type="text" placeholder="{{addressToEdit()?.address}}" />
+    <label>POSTAL CODE</label>
+    <input type="text" placeholder="{{addressToEdit()?.postalCode}}" />
+    <label>CITY</label>
+    <input type="text" placeholder="{{addressToEdit()?.city}}" />
+    <label>COUNTRY</label>
+    <input type="text" placeholder="{{addressToEdit()?.country}}" />
+    <div class="buttons">
+      <button class="exit" (click)="toggleEdit()">
+        <fa-icon [icon]="faX" />
+        Cancel
+      </button>
+      <button class="delete" (click)="toggleEdit()">
+        <fa-icon [icon]="faTrash" />
+        Delete
+      </button>
+      <button>
+        <fa-icon [icon]="faSave" />
+        Save
+      </button>
     </div>
   }
-  <div class="address add">
-    <fa-icon [icon]="faPlus" />
-  </div>
 </div>

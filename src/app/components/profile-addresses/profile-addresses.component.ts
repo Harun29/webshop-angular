@@ -1,7 +1,11 @@
-import {Component, Input} from '@angular/core';
+import {Component, Input, signal} from '@angular/core';
 import {Address} from '../../models/address.model';
 import {FaIconComponent} from '@fortawesome/angular-fontawesome';
 import {faPlus} from '@fortawesome/free-solid-svg-icons/faPlus';
+import {faX} from '@fortawesome/free-solid-svg-icons/faX';
+import {faSave} from '@fortawesome/free-solid-svg-icons';
+import {faEdit} from '@fortawesome/free-solid-svg-icons/faEdit';
+import {faTrash} from '@fortawesome/free-solid-svg-icons/faTrash';
 
 @Component({
   selector: 'app-profile-addresses',
@@ -13,5 +17,21 @@ import {faPlus} from '@fortawesome/free-solid-svg-icons/faPlus';
 })
 export class ProfileAddressesComponent {
   @Input() addresses: Address[] = [];
+  protected editToggled = signal(false);
+  protected addressToEdit = signal<Address | null>(null);
+
+  protected toggleEdit() {
+    this.editToggled.set(!this.editToggled());
+  }
+
+  protected editAddress(address: Address) {
+    this.addressToEdit.set(address);
+    this.toggleEdit();
+  }
+
   protected readonly faPlus = faPlus;
+  protected readonly faX = faX;
+  protected readonly faSave = faSave;
+  protected readonly faEdit = faEdit;
+  protected readonly faTrash = faTrash;
 }
