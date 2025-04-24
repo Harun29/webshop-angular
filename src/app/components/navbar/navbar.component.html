@@ -22,7 +22,7 @@
       <span>+ $12</span>
     </div>
   </div>
-  <div class="cart-container" [class.expanded]="isExpanded" (click)="!isExpanded && toggleCart()" [routerLink]="isExpanded ? '/checkout' : null">
+  <div class="cart-container" [class.expanded]="isExpanded" (click)="!isExpanded ? toggleCart() : resetOverflow()" [routerLink]="isExpanded ? '/checkout' : null">
     @if (isExpanded) {
       <span>Checkout
        <fa-icon [icon]="faArrowRight"></fa-icon>

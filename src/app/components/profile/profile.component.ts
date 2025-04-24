@@ -3,7 +3,6 @@ import {FaIconComponent} from '@fortawesome/angular-fontawesome';
 import {faUser} from '@fortawesome/free-solid-svg-icons/faUser';
 import {faInfo} from '@fortawesome/free-solid-svg-icons/faInfo';
 import {faAddressCard} from '@fortawesome/free-solid-svg-icons/faAddressCard';
-import {NgIf} from '@angular/common';
 import {UserService} from '../../services/user.service';
 import {User} from '../../models/user.model';
 import {ProfileInfoComponent} from '../profile-info/profile-info.component';

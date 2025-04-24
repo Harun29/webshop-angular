@@ -57,6 +57,10 @@ export class NavbarComponent {
     }
   }
 
+  resetOverflow() {
+    document.body.style.overflow = '';
+  }
+
   togglePage(page: pages) {
     this.selectedPage.set(page);
     this.pageToggled.emit(page);
