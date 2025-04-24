@@ -36,26 +36,27 @@
       color: #3C74FE;
       width: auto;
     }
-  }
 
-  .address{
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-    justify-content: start;
-    position: relative;
-    color: #666666;
+    .address{
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      justify-content: start;
+      position: relative;
+      color: #666666;
 
-    .checked-address{
-      position: absolute;
-      bottom: 5px;
-      right: 10px;
+      .checked-address{
+        position: absolute;
+        bottom: 5px;
+        right: 10px;
 
-      fa-icon{
-        color: #3C74FE;
+        fa-icon{
+          color: #3C74FE;
+        }
       }
     }
   }
+
 
   .order-summary{
 

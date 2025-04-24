@@ -1,0 +1,9 @@
+<div class="addresses">
+  @for(address of addresses; track address.id) {
+    <div class="address">
+      <span>{{address.address}}</span>
+      <span>{{address.postalCode + ' ' + address.city}}</span>
+      <span>{{address.country}}</span>
+    </div>
+  }
+</div>

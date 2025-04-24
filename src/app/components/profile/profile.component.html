@@ -1,7 +1,7 @@
 <div class="profile">
   <div class="user-info">
     <div class="name-and-heading">
-      <span>Hello, {{user?.firstName}}</span>
+      <span>Hello, {{user.firstName}}</span>
       <h3>Manage your profile from here</h3>
     </div>
     <div class="avatar">
@@ -10,14 +10,18 @@
   </div>
   <div class="settings">
     <div class="nav-buttons">
-      <button>
+      <button (click) = "changeTab(tabs.info)">
         <fa-icon [icon]="faInfo" />
         Your Info</button>
-      <button>
+      <button (click) = "changeTab(tabs.address)">
         <fa-icon [icon]="faAddressCard" />
         Addresses</button>
     </div>
-    <app-profile-info [user]="user"/>
+    @if(selectedTab === tabs.info){
+      <app-profile-info [user]="user"/>
+    }@else{
+      <app-profile-addresses [addresses]="addresses"/>
+    }
   </div>
   <div class="past-orders">
     <span>Past orders</span>
