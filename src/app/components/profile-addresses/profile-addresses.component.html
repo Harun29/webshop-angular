@@ -1,5 +1,5 @@
-<div class="addresses" [class.editToggled]="editToggled()">
-  @if(!editToggled()){@for(address of addresses; track address.id) {
+<div class="addresses" [class.editToggled]="editToggled() || addAddressToggled()">
+  @if(!editToggled() && !addAddressToggled()){@for(address of addresses; track address.id) {
     <div class="address" (click)="editAddress(address)">
       <span class="address-name">Address {{ address.id }}</span>
       <span>{{ address.address }}</span>
@@ -8,10 +8,10 @@
       <fa-icon class="edit-icon" [icon]="faEdit"/>
     </div>
     }
-    <div class="address add">
+    <div class="address add" (click)="toggleAddAddress()">
       <fa-icon [icon]="faPlus" />
     </div>}
-  @else{
+  @else if(editToggled() && !addAddressToggled()) {
     <label>ADDRESS</label>
     <input type="text" placeholder="{{addressToEdit()?.address}}" />
     <label>POSTAL CODE</label>
@@ -32,6 +32,25 @@
       <button>
         <fa-icon [icon]="faSave" />
         Save
+      </button>
+    </div>
+  }@else{
+    <label>ADDRESS</label>
+    <input type="text" placeholder="Address" />
+    <label>POSTAL CODE</label>
+    <input type="text" placeholder="Postal Code" />
+    <label>CITY</label>
+    <input type="text" placeholder="City" />
+    <label>COUNTRY</label>
+    <input type="text" placeholder="Country" />
+    <div class="buttons">
+      <button class="exit" (click)="toggleAddAddress()">
+        <fa-icon [icon]="faX" />
+        Cancel
+      </button>
+      <button>
+        <fa-icon [icon]="faSave" />
+        Add
       </button>
     </div>
   }

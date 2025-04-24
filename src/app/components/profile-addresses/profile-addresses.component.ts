@@ -19,9 +19,14 @@ export class ProfileAddressesComponent {
   @Input() addresses: Address[] = [];
   protected editToggled = signal(false);
   protected addressToEdit = signal<Address | null>(null);
+  protected addAddressToggled = signal(false);
 
   protected toggleEdit() {
     this.editToggled.set(!this.editToggled());
+  }
+
+  protected toggleAddAddress() {
+    this.addAddressToggled.set(!this.addAddressToggled());
   }
 
   protected editAddress(address: Address) {
