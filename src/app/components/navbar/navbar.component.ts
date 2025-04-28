@@ -27,7 +27,8 @@ export class NavbarComponent {
 
   protected readonly pages = pages;
 
-  isVisible = false;
+  isVisible = window.screen.width > 1024;
+  isDesktop = window.screen.width > 1024;
   isExpanded = false;
   cartService = inject(CartService);
   pageToggled = output<pages>();
@@ -44,8 +45,14 @@ export class NavbarComponent {
 
   @HostListener('window:scroll', [])
   onWindowScroll() {
+    if(window.screen.width > 1024) return;
     const scrollPosition = window.scrollY || document.documentElement.scrollTop || document.body.scrollTop || 0;
     this.isVisible = scrollPosition > 100;
+  }
+
+  @HostListener('window:resize', [])
+  onWindowResize() {
+    this.isDesktop = window.screen.width > 1024;
   }
 
   toggleCart() {
