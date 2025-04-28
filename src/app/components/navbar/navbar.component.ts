@@ -1,8 +1,8 @@
-import {Component, HostListener, inject, output, signal} from '@angular/core';
+import {Component, HostListener, Inject, inject, output, PLATFORM_ID, signal} from '@angular/core';
 import {FaIconComponent} from '@fortawesome/angular-fontawesome';
 import {faArrowRight, faCartShopping} from '@fortawesome/free-solid-svg-icons';
 import {CartService} from '../../services/cart.service';
-import {NgClass, NgIf} from '@angular/common';
+import {isPlatformBrowser, NgClass, NgIf} from '@angular/common';
 import {CartComponent} from '../cart/cart.component';
 import {SwipeDownDirective} from '../../directives/swipe-down.directive';
 import {RouterLink} from '@angular/router';
@@ -27,8 +27,8 @@ export class NavbarComponent {
 
   protected readonly pages = pages;
 
-  isVisible = window.screen.width > 1024;
-  isDesktop = window.screen.width > 1024;
+  isVisible = false;
+  isDesktop = false;
   isExpanded = false;
   cartService = inject(CartService);
   pageToggled = output<pages>();
@@ -41,7 +41,12 @@ export class NavbarComponent {
   protected readonly faHouse = faHouse;
   protected readonly faUser = faUser;
 
-  constructor() {}
+  constructor(@Inject(PLATFORM_ID) private platformId: Object) {
+    if(isPlatformBrowser(this.platformId)) {
+      this.isDesktop = window.screen.width > 1024;
+      this.isVisible = window.screen.width > 1024;
+    }
+  }
 
   @HostListener('window:scroll', [])
   onWindowScroll() {
@@ -72,5 +77,4 @@ export class NavbarComponent {
     this.selectedPage.set(page);
     this.pageToggled.emit(page);
   }
-
 }

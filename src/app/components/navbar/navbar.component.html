@@ -2,7 +2,7 @@
 <div class="navbar" [class.visible]="isVisible" [class.hidden]="!isVisible" appSwipeDown (swipeDown)="isExpanded && toggleCart()">
   <div class="closed-navbar" *ngIf="!isExpanded">
     <div *ngIf="isDesktop" class="logo">Your Webshop</div>
-    <div class="active-indicator" [ngClass]="selectedPage()===pages.HOME ? 'home' : 'profile'"></div>
+    <div class="active-indicator" [ngClass]="selectedPage() === pages.PROFILE ? 'profile' : null"></div>
     <div class="navigate-icon" (click)="togglePage(pages.HOME)" [class.active]="selectedPage() === pages.HOME">
       <fa-icon [icon]="faHouse" />
     </div>
