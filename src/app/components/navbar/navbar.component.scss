@@ -6,7 +6,7 @@
   height: 100vh;
   background-color: rgba(0, 0, 0, 0.5);
   backdrop-filter: blur(10px);
-  z-index: 10;
+  z-index: 30;
 }
 
 .navbar{
@@ -16,7 +16,7 @@
   font-family: 'Poppins', sans-serif;
   position: fixed;
   bottom: 0;
-  z-index: 20;
+  z-index: 40;
   color: white;
   background: white;
   padding: 10px 15px;
@@ -32,6 +32,7 @@
     top: 0;
     bottom: auto;
     border-radius: 0;
+    z-index: 20;
   }
 
   &.hidden{
@@ -48,50 +49,6 @@
     background: #e3e3e3;
     border-radius: 10px;
     margin-bottom: 10px;
-  }
-
-  .cart-header{
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 2rem;
-    color: #333333;
-  }
-
-  .cart-details {
-    width: 100%;
-    display: flex;
-    flex-direction: column;
-    padding-top: 0.5rem;
-    gap: 0.5rem;
-    border-top: 1px solid #e3e3e3;
-    border-radius: 0.5rem;
-
-    .total,
-    .delivery {
-      font-size: 1.2rem;
-      display: flex;
-      justify-content: space-between;
-      font-weight: 500;
-    }
-
-    .total {
-      span:first-child {
-        color: #666;
-      }
-      span:last-child {
-        color: #333;
-      }
-    }
-
-    .delivery {
-      span:first-child {
-        color: #777;
-      }
-      span:last-child {
-        color: #3C74FE;
-      }
-    }
   }
 
   .closed-navbar{
@@ -177,7 +134,53 @@
   }
 }
 
+.cart-header{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 2rem;
+  color: #333333;
+}
+
+.cart-details {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  padding-top: 0.5rem;
+  gap: 0.5rem;
+  border-top: 1px solid #e3e3e3;
+  border-radius: 0.5rem;
+
+  .total,
+  .delivery {
+    font-size: 1.2rem;
+    display: flex;
+    justify-content: space-between;
+    font-weight: 500;
+  }
+
+  .total {
+    span:first-child {
+      color: #666;
+    }
+    span:last-child {
+      color: #333;
+    }
+  }
+
+  .delivery {
+    span:first-child {
+      color: #777;
+    }
+    span:last-child {
+      color: #3C74FE;
+    }
+  }
+}
+
 .cart-container{
+  font-family: 'Poppins', sans-serif;
+  z-index: 40;
   color: white;
   width: 40px;
   height: 40px;
@@ -222,6 +225,28 @@
 
     span{
       font-size: 1.2rem;
+    }
+  }
+}
+
+.desktop-cart{
+  font-family: 'Poppins', sans-serif;
+  z-index: 40;
+  position: fixed;
+  bottom: 0;
+  right: 0;
+  top: 0;
+  width: 400px;
+  background: white;
+  padding: 15px 30px;
+  display: grid;
+  grid-template-rows: auto 1fr auto auto;
+
+  .cart-container{
+    &.expanded{
+      width: calc(100% - 34px);
+      margin: 5px 0 0 0;
+      bottom: 0;
     }
   }
 }

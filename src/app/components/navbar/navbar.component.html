@@ -1,6 +1,6 @@
-<div class="overlay" *ngIf="isExpanded"></div>
-<div class="navbar" [class.visible]="isVisible" [class.hidden]="!isVisible" appSwipeDown (swipeDown)="isExpanded && toggleCart()">
-  <div class="closed-navbar" *ngIf="!isExpanded">
+<div class="overlay" *ngIf="isExpanded" (click)="isDesktop && toggleCart()"></div>
+<div class="navbar" [class.visible]="isVisible" [class.hidden]="!isVisible" appSwipeDown (swipeDown)="isExpanded && !isDesktop && toggleCart()">
+  <div class="closed-navbar" *ngIf="!isExpanded || isDesktop">
     <div *ngIf="isDesktop" class="logo">Your Webshop</div>
     <div class="active-indicator" [ngClass]="selectedPage() === pages.PROFILE ? 'profile' : null"></div>
     <div class="navigate-icon" (click)="togglePage(pages.HOME)" [class.active]="selectedPage() === pages.HOME">
@@ -10,10 +10,10 @@
       <fa-icon [icon]="faUser" />
     </div>
   </div>
-  <div class="swipe-gesture" *ngIf="isExpanded"></div>
-  <span class="cart-header" *ngIf="isExpanded">Cart</span>
-  <app-cart *ngIf="isExpanded" [cartItems]="cartItems()"></app-cart>
-  <div class="cart-details" *ngIf="isExpanded">
+  <div class="swipe-gesture" *ngIf="isExpanded && !isDesktop"></div>
+  <span class="cart-header" *ngIf="isExpanded && !isDesktop">Cart</span>
+  <app-cart *ngIf="isExpanded && !isDesktop" [cartItems]="cartItems()"></app-cart>
+  <div class="cart-details" *ngIf="isExpanded && !isDesktop">
     <div class="total">
       <span>Total:</span>
       <span>${{totalPrice().toFixed(2)}}</span>
@@ -33,12 +33,25 @@
     }
   </div>
 </div>
-<div *ngIf="isDesktop" class="cart-container" [class.expanded]="isExpanded" (click)="!isExpanded ? toggleCart() : resetOverflow()" [routerLink]="isExpanded ? '/checkout' : null">
-  @if (isExpanded) {
-    <span>Checkout
+<div *ngIf="isDesktop" class="cart-container" (click)="!isExpanded ? toggleCart() : resetOverflow()" [routerLink]="isExpanded ? '/checkout' : null">
+    <fa-icon [icon]="faCartShopping"></fa-icon>
+</div>
+<div class="desktop-cart" *ngIf="isExpanded && isDesktop">
+  <span class="cart-header">Cart</span>
+  <app-cart  [cartItems]="cartItems()"></app-cart>
+  <div class="cart-details">
+    <div class="total">
+      <span>Total:</span>
+      <span>${{totalPrice().toFixed(2)}}</span>
+    </div>
+    <div class="delivery">
+      <span>Delivery cost:</span>
+      <span>+ $12</span>
+    </div>
+  </div>
+  <div class="cart-container expanded" (click)="!isExpanded ? toggleCart() : resetOverflow()" [routerLink]="isExpanded ? '/checkout' : null">
+      <span>Checkout
        <fa-icon [icon]="faArrowRight"></fa-icon>
       </span>
-  } @else {
-    <fa-icon [icon]="faCartShopping"></fa-icon>
-  }
+  </div>
 </div>

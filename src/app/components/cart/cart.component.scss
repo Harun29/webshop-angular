@@ -10,4 +10,11 @@
     font-size: 1.2rem;
     color: #333333;
   }
+
+  @media screen and (min-width: 1024px) {
+    height: auto;
+    margin: 0;
+    padding: 0 15px;
+    overflow-y: hidden;
+  }
 }
