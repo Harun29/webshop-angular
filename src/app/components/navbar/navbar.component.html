@@ -1,5 +1,5 @@
 <div class="overlay" *ngIf="isExpanded" (click)="isDesktop && toggleCart()"></div>
-<div class="navbar" [class.visible]="isVisible" [class.hidden]="!isVisible" appSwipeDown (swipeDown)="isExpanded && !isDesktop && toggleCart()">
+<div class="navbar" [class.visible]="isVisible || selectedPage() === pages.PROFILE" [class.hidden]="!isVisible && selectedPage() === pages.HOME" appSwipeDown (swipeDown)="isExpanded && !isDesktop && toggleCart()">
   <div class="closed-navbar" *ngIf="!isExpanded || isDesktop">
     <div *ngIf="isDesktop" class="logo">Your Webshop</div>
     <div class="active-indicator" [ngClass]="selectedPage() === pages.PROFILE ? 'profile' : null"></div>

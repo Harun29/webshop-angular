@@ -57,6 +57,7 @@ export class NavbarComponent {
 
   @HostListener('window:resize', [])
   onWindowResize() {
+    this.isVisible = window.screen.width > 1024;
     this.isDesktop = window.screen.width > 1024;
   }
 
