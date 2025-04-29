@@ -1,7 +1,7 @@
-<div class="overlay" *ngIf="isExpanded" (click)="isDesktop && toggleCart()"></div>
-<div class="navbar" [class.visible]="isVisible || selectedPage() === pages.PROFILE" [class.hidden]="!isVisible && selectedPage() === pages.HOME" appSwipeDown (swipeDown)="isExpanded && !isDesktop && toggleCart()">
-  <div class="closed-navbar" *ngIf="!isExpanded || isDesktop">
-    <div *ngIf="isDesktop" class="logo">Your Webshop</div>
+<div class="overlay" *ngIf="isExpanded()" (click)="isDesktop() && toggleCart()"></div>
+<div class="navbar" [class.visible]="isVisible() || selectedPage() === pages.PROFILE" [class.hidden]="!isVisible().valueOf() && selectedPage() === pages.HOME" appSwipeDown (swipeDown)="isExpanded() && !isDesktop() && toggleCart()">
+  <div class="closed-navbar" *ngIf="!isExpanded() || isDesktop()">
+    <div *ngIf="isDesktop()" class="logo">Your Webshop</div>
     <div class="active-indicator" [ngClass]="selectedPage() === pages.PROFILE ? 'profile' : null"></div>
     <div class="navigate-icon" (click)="togglePage(pages.HOME)" [class.active]="selectedPage() === pages.HOME">
       <fa-icon [icon]="faHouse" />
@@ -10,10 +10,10 @@
       <fa-icon [icon]="faUser" />
     </div>
   </div>
-  <div class="swipe-gesture" *ngIf="isExpanded && !isDesktop"></div>
-  <span class="cart-header" *ngIf="isExpanded && !isDesktop">Cart</span>
-  <app-cart *ngIf="isExpanded && !isDesktop" [cartItems]="cartItems()"></app-cart>
-  <div class="cart-details" *ngIf="isExpanded && !isDesktop">
+  <div class="swipe-gesture" *ngIf="isExpanded() && !isDesktop()"></div>
+  <span class="cart-header" *ngIf="isExpanded() && !isDesktop()">Cart</span>
+  <app-cart *ngIf="isExpanded() && !isDesktop()" [cartItems]="cartItems()"></app-cart>
+  <div class="cart-details" *ngIf="isExpanded() && !isDesktop()">
     <div class="total">
       <span>Total:</span>
       <span>${{totalPrice().toFixed(2)}}</span>
@@ -23,8 +23,8 @@
       <span>+ $12</span>
     </div>
   </div>
-  <div *ngIf="!isDesktop" class="cart-container" [class.expanded]="isExpanded" (click)="!isExpanded ? toggleCart() : resetOverflow()" [routerLink]="isExpanded ? '/checkout' : null">
-    @if (isExpanded) {
+  <div *ngIf="!isDesktop()" class="cart-container" [class.expanded]="isExpanded()" (click)="!isExpanded() ? toggleCart() : resetOverflow()" [routerLink]="isExpanded() ? '/checkout' : null">
+    @if (isExpanded()) {
       <span>Checkout
        <fa-icon [icon]="faArrowRight"></fa-icon>
       </span>
@@ -33,10 +33,10 @@
     }
   </div>
 </div>
-<div *ngIf="isDesktop" class="cart-container" (click)="!isExpanded ? toggleCart() : resetOverflow()" [routerLink]="isExpanded ? '/checkout' : null">
+<div *ngIf="isDesktop()" class="cart-container" (click)="!isExpanded() ? toggleCart() : resetOverflow()" [routerLink]="isExpanded() ? '/checkout' : null">
     <fa-icon [icon]="faCartShopping"></fa-icon>
 </div>
-<div class="desktop-cart" *ngIf="isExpanded && isDesktop">
+<div class="desktop-cart" *ngIf="isExpanded() && isDesktop()">
   <span class="cart-header">Cart</span>
   <app-cart  [cartItems]="cartItems()"></app-cart>
   <div class="cart-details">
@@ -49,7 +49,7 @@
       <span>+ $12</span>
     </div>
   </div>
-  <div class="cart-container expanded" (click)="!isExpanded ? toggleCart() : resetOverflow()" [routerLink]="isExpanded ? '/checkout' : null">
+  <div class="cart-container expanded" (click)="!isExpanded() ? toggleCart() : resetOverflow()" [routerLink]="isExpanded() ? '/checkout' : null">
       <span>Checkout
        <fa-icon [icon]="faArrowRight"></fa-icon>
       </span>

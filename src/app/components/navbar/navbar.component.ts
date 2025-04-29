@@ -27,9 +27,9 @@ export class NavbarComponent {
 
   protected readonly pages = pages;
 
-  isVisible = false;
-  isDesktop = false;
-  isExpanded = false;
+  isVisible = signal(false);
+  isDesktop = signal(false);
+  isExpanded = signal(false);
   cartService = inject(CartService);
   pageToggled = output<pages>();
   selectedPage = signal<pages>(pages.HOME);
@@ -43,8 +43,8 @@ export class NavbarComponent {
 
   constructor(@Inject(PLATFORM_ID) private platformId: Object) {
     if(isPlatformBrowser(this.platformId)) {
-      this.isDesktop = window.screen.width > 1024;
-      this.isVisible = window.screen.width > 1024;
+      this.isDesktop.update(() => window.screen.width > 1024);
+      this.isVisible.update(() => window.screen.width > 1024);
     }
   }
 
@@ -52,18 +52,18 @@ export class NavbarComponent {
   onWindowScroll() {
     if(window.screen.width > 1024) return;
     const scrollPosition = window.scrollY || document.documentElement.scrollTop || document.body.scrollTop || 0;
-    this.isVisible = scrollPosition > 100;
+    this.isVisible.update(() => scrollPosition > 100);
   }
 
   @HostListener('window:resize', [])
   onWindowResize() {
-    this.isVisible = window.screen.width > 1024;
-    this.isDesktop = window.screen.width > 1024;
+    this.isDesktop.update(() => window.screen.width > 1024);
+    this.isVisible.update(() => window.screen.width > 1024);
   }
 
   toggleCart() {
-    this.isExpanded = !this.isExpanded;
-    if (this.isExpanded) {
+    this.isExpanded.update(()=> !this.isExpanded());
+    if (this.isExpanded().valueOf()) {
       document.body.style.overflow = 'hidden';
     } else {
       document.body.style.overflow = '';
