@@ -1,0 +1,21 @@
+<div class="auth-container">
+  <div class="form-toggle">
+    <button [class.active]="isLoginMode" (click)="isLoginMode = true">Login</button>
+    <button [class.active]="!isLoginMode" (click)="isLoginMode = false">Register</button>
+  </div>
+
+  <form *ngIf="isLoginMode" (ngSubmit)="onLogin()" class="auth-form">
+    <h2>Login</h2>
+    <input type="email" placeholder="Email" [(ngModel)]="loginData.email" name="loginEmail" required />
+    <input type="password" placeholder="Password" [(ngModel)]="loginData.password" name="loginPassword" required />
+    <button type="submit">Login</button>
+  </form>
+
+  <form *ngIf="!isLoginMode" (ngSubmit)="onRegister()" class="auth-form">
+    <h2>Register</h2>
+    <input type="text" placeholder="Username" [(ngModel)]="registerData.username" name="registerUsername" required />
+    <input type="email" placeholder="Email" [(ngModel)]="registerData.email" name="registerEmail" required />
+    <input type="password" placeholder="Password" [(ngModel)]="registerData.password" name="registerPassword" required />
+    <button type="submit">Register</button>
+  </form>
+</div>

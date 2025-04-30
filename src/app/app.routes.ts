@@ -12,8 +12,8 @@ export const routes: Routes = [
     loadComponent: () => import('./checkout/checkout.component').then(m => m.CheckoutComponent),
   },
   {
-    path: 'profile',
+    path: 'login',
     pathMatch: 'full',
-    loadComponent: () => import('./components/profile/profile.component').then(m => m.ProfileComponent),
+    loadComponent: () => import('./login/login.component').then(m => m.LoginComponent),
   }
 ];
