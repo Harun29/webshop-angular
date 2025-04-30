@@ -6,7 +6,7 @@
 
   <form *ngIf="isLoginMode" (ngSubmit)="onLogin()" class="auth-form">
     <h2>Login</h2>
-    <input type="email" placeholder="Email" [(ngModel)]="loginData.email" name="loginEmail" required />
+    <input type="text" placeholder="Username" [(ngModel)]="loginData.username" name="loginUsername" required />
     <input type="password" placeholder="Password" [(ngModel)]="loginData.password" name="loginPassword" required />
     <button type="submit">Login</button>
   </form>

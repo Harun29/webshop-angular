@@ -1,8 +1,9 @@
-import { Injectable } from '@angular/core';
+import { Inject, Injectable, PLATFORM_ID } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable, of } from 'rxjs';
 import { Address } from '../models/address.model';
 import { User } from '../models/user.model';
+import { isPlatformBrowser } from '@angular/common';
 
 @Injectable({
   providedIn: 'root',
@@ -32,20 +33,23 @@ export class UserService {
     },
   ];
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient, @Inject(PLATFORM_ID) private platformId: Object) {}
 
-  getCurrentUser(): Observable<User> {
-    const mockUser: User = {
-      id: 1,
-      firstName: 'John',
-      lastName: 'Doe',
-      userName: 'johndoe',
-      email: 'johndoe@example.com',
-      phone: '123-456-7890',
-      addresses: this.addresses,
-    };
+  login(obj: {username: string, password: string}): Observable<any> {
+    return this.http.post('/api/login', obj);
+  }
 
-    return of(mockUser);
+  getCurrentUser(): Observable<User | null> {
+    if (isPlatformBrowser(this.platformId)) {
+      const user = sessionStorage.getItem('user');
+      if (user) {
+        return of(JSON.parse(user) as User);
+      } else {
+        return of(null);
+      }
+    } else {
+      throw of(null);
+    }
   }
 
   getAddresses(): Observable<Address[]> {

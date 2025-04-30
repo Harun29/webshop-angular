@@ -9,6 +9,7 @@ import {ProfileInfoComponent} from '../profile-info/profile-info.component';
 import {Address} from '../../models/address.model';
 import {ProfileAddressesComponent} from '../profile-addresses/profile-addresses.component';
 import {isPlatformBrowser, NgIf} from '@angular/common';
+import {Router} from '@angular/router';
 
 enum tabs {
   info,
@@ -38,7 +39,7 @@ export class ProfileComponent implements OnInit {
   user!: User;
   addresses!: Address[];
 
-  constructor(@Inject(PLATFORM_ID) private platformId: Object) {
+  constructor(@Inject(PLATFORM_ID) private platformId: Object, private route: Router) {
     if(isPlatformBrowser(this.platformId)) {
       this.isDesktop.update(() => window.screen.width > 1024);
     }
@@ -56,6 +57,10 @@ export class ProfileComponent implements OnInit {
   ngOnInit() {
     this.isDesktop.update(() => window.screen.width > 1024);
     this.userService.getCurrentUser().subscribe((data) => {
+      if (data === null) {
+        this.route.navigateByUrl('/login')
+        return
+      }
       this.user = data;
       this.addresses = data.addresses;
     });
