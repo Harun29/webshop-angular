@@ -9,3 +9,13 @@ export type User = {
   phone: string;
   addresses: Address[];
 }
+
+export type UserDto = {
+  id: number;
+  username: string;
+  email: string;
+  firstName?: string;
+  lastName?: string;
+  addresses?: Address[];
+  phone?: string;
+};

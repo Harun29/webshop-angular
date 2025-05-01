@@ -35,24 +35,4 @@ export class UserService {
 
   constructor(private http: HttpClient, @Inject(PLATFORM_ID) private platformId: Object) {}
 
-  login(obj: {username: string, password: string}): Observable<any> {
-    return this.http.post('/api/login', obj);
-  }
-
-  getCurrentUser(): Observable<User | null> {
-    if (isPlatformBrowser(this.platformId)) {
-      const user = sessionStorage.getItem('user');
-      if (user) {
-        return of(JSON.parse(user) as User);
-      } else {
-        return of(null);
-      }
-    } else {
-      throw of(null);
-    }
-  }
-
-  getAddresses(): Observable<Address[]> {
-    return of(this.addresses);
-  }
 }
