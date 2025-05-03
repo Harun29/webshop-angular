@@ -8,24 +8,44 @@
       <fa-icon [icon]="faUser" />
     </div>
   </div>
+
   <div class="settings">
     <div class="nav-buttons" *ngIf="!isDesktop()">
-      <button (click) = "changeTab(tabs.info)" [class.toggled]="selectedTab === tabs.info">
+      <button (click)="changeTab(tabs.info)" [class.toggled]="selectedTab === tabs.info">
         <fa-icon [icon]="faInfo" />
-        Your Info</button>
-      <button (click) = "changeTab(tabs.address)" [class.toggled]="selectedTab === tabs.address">
+        Your Info
+      </button>
+      <button (click)="changeTab(tabs.address)" [class.toggled]="selectedTab === tabs.address">
         <fa-icon [icon]="faAddressCard" />
-        Addresses</button>
+        Addresses
+      </button>
     </div>
-    @if(selectedTab === tabs.info && !isDesktop()){
-      <app-profile-info [user]="user"/>
-    }@else if(selectedTab === tabs.address && !isDesktop()){
-      <app-profile-addresses [addresses]="addresses"/>
-    }@else{
-      <app-profile-info [user]="user"/>
-      <app-profile-addresses [addresses]="addresses"/>
-    }
+
+    <!-- Conditional rendering based on selectedTab and isDesktop -->
+    <div *ngIf="selectedTab === tabs.info && !isDesktop()">
+      <app-profile-info
+        *ngIf="user"
+        [user]="user"
+        (userUpdated)="onUserUpdated($event)"
+      ></app-profile-info>
+
+    </div>
+
+    <div *ngIf="selectedTab === tabs.address && !isDesktop()">
+      <app-profile-addresses [addresses]="addresses"></app-profile-addresses>
+    </div>
+
+    <div *ngIf="isDesktop()">
+      <app-profile-info
+        *ngIf="user"
+        [user]="user"
+        (userUpdated)="onUserUpdated($event)"
+      ></app-profile-info>
+
+      <app-profile-addresses [addresses]="addresses"></app-profile-addresses>
+    </div>
   </div>
+
   <div class="past-orders">
     <span>Past orders</span>
   </div>

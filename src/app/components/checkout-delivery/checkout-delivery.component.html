@@ -6,7 +6,7 @@
     </div>
     @for(address of addresses; track address.id) {
       <div class="address" (click)="setSelectAddress(address)">
-        <span>{{address.address}}</span>
+        <span>{{address.street}}</span>
         <span>{{address.postalCode + ' ' + address.city}}</span>
         <span>{{address.country}}</span>
         <span *ngIf="selectedAddress.id === address.id" class="checked-address">

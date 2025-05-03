@@ -1,5 +1,4 @@
-import { HTTP_INTERCEPTORS, provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
-import { AuthInterceptor } from './services/auth.interceptor';
+import { provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
 import {ApplicationConfig, provideZoneChangeDetection} from '@angular/core';
 import {provideAnimationsAsync} from '@angular/platform-browser/animations/async';
 import {providePrimeNG} from 'primeng/config';
@@ -11,7 +10,6 @@ export const appConfig: ApplicationConfig = {
   providers: [
     provideAnimationsAsync(),
     provideHttpClient(withInterceptorsFromDi()),
-    { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true },
     providePrimeNG(),
     provideZoneChangeDetection({ eventCoalescing: true }),
     provideRouter(routes),

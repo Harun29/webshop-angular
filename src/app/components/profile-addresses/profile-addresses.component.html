@@ -1,57 +1,62 @@
 <div class="addresses" [class.editToggled]="editToggled() || addAddressToggled()">
-  @if(!editToggled() && !addAddressToggled()){@for(address of addresses; track address.id) {
-    <div class="address" (click)="editAddress(address)">
+  <div *ngIf="!editToggled() && !addAddressToggled()">
+    <div *ngFor="let address of addresses; trackBy: trackById" class="address" (click)="editAddress(address)">
       <span class="address-name">Address {{ address.id }}</span>
-      <span>{{ address.address }}</span>
+      <span>{{ address.street }}</span>
       <span>{{ address.postalCode + ' ' + address.city }}</span>
       <span>{{ address.country }}</span>
       <fa-icon class="edit-icon" [icon]="faEdit"/>
     </div>
-    }
     <div class="address add" (click)="toggleAddAddress()">
       <fa-icon [icon]="faPlus" />
-    </div>}
-  @else if(editToggled() && !addAddressToggled()) {
+    </div>
+  </div>
+
+  <div *ngIf="editToggled() && !addAddressToggled()">
     <label>ADDRESS</label>
-    <input type="text" placeholder="{{addressToEdit()?.address}}" />
+    <input type="text" [(ngModel)]="addressForm.street" placeholder="{{addressToEdit()?.street}}" />
     <label>POSTAL CODE</label>
-    <input type="text" placeholder="{{addressToEdit()?.postalCode}}" />
+    <input type="text" [(ngModel)]="addressForm.postalCode" placeholder="{{addressToEdit()?.postalCode}}" />
     <label>CITY</label>
-    <input type="text" placeholder="{{addressToEdit()?.city}}" />
+    <input type="text" [(ngModel)]="addressForm.city" placeholder="{{addressToEdit()?.city}}" />
     <label>COUNTRY</label>
-    <input type="text" placeholder="{{addressToEdit()?.country}}" />
+    <input type="text" [(ngModel)]="addressForm.country" placeholder="{{addressToEdit()?.country}}" />
     <div class="buttons">
       <button class="exit" (click)="toggleEdit()">
         <fa-icon [icon]="faX" />
         Cancel
       </button>
-      <button class="delete" (click)="toggleEdit()">
+      <button class="delete" (click)="deleteAddress(addressForm)">
         <fa-icon [icon]="faTrash" />
         Delete
       </button>
-      <button>
+      <button (click)="saveAddress(addressForm)" [disabled]="!addressForm.street || !addressForm.postalCode || !addressForm.city || !addressForm.country">
         <fa-icon [icon]="faSave" />
         Save
       </button>
     </div>
-  }@else{
-    <label>ADDRESS</label>
-    <input type="text" placeholder="Address" />
+  </div>
+
+  <div *ngIf="!editToggled() && addAddressToggled()">
+    <label>STREET</label>
+    <input type="text" [(ngModel)]="addressForm.street" placeholder="Street" />
     <label>POSTAL CODE</label>
-    <input type="text" placeholder="Postal Code" />
+    <input type="text" [(ngModel)]="addressForm.postalCode" placeholder="Postal Code" />
     <label>CITY</label>
-    <input type="text" placeholder="City" />
+    <input type="text" [(ngModel)]="addressForm.city" placeholder="City" />
     <label>COUNTRY</label>
-    <input type="text" placeholder="Country" />
+    <input type="text" [(ngModel)]="addressForm.country" placeholder="Country" />
     <div class="buttons">
       <button class="exit" (click)="toggleAddAddress()">
         <fa-icon [icon]="faX" />
         Cancel
       </button>
-      <button>
+      <button (click)="saveAddress(addressForm)" [disabled]="!addressForm.street || !addressForm.postalCode || !addressForm.city || !addressForm.country">
         <fa-icon [icon]="faSave" />
         Add
       </button>
     </div>
-  }
+  </div>
 </div>
+
+<div *ngIf="errorMessage" class="error">{{ errorMessage }}</div>

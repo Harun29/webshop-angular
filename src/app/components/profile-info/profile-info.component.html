@@ -1,39 +1,50 @@
-<div class="profile-info">
+<div class="profile-info" *ngIf="user">
   <label>Full Name</label>
-  @if (profileEditMode){
-    <input type="text" placeholder="{{user.firstName + ' ' + user.lastName}}" />
-  }@else{
-    <span>{{user.firstName + " " + user.lastName}}</span>
-  }
+  <div *ngIf="profileEditMode">
+    <input type="text" [(ngModel)]="user.firstName" placeholder="First Name" />
+    <input type="text" [(ngModel)]="user.lastName" placeholder="Last Name" />
+  </div>
+  <div *ngIf="!profileEditMode">
+    <span>{{ user.firstName + ' ' + user.lastName }}</span>
+  </div>
+
   <label>Username</label>
-  @if (profileEditMode){
-    <input type="text" placeholder="{{user.userName}}" />
-  }@else{
-    <span>{{user.userName}}</span>
-  }
+  <div *ngIf="profileEditMode">
+    <input type="text" [(ngModel)]="user.username" placeholder="{{ user.username }}" />
+  </div>
+  <div *ngIf="!profileEditMode">
+    <span>{{ user.username }}</span>
+  </div>
+
   <label>Email</label>
-  @if (profileEditMode){
-    <input type="email" placeholder="{{user.email}}" />
-  }@else{
-    <span>{{user.email}}</span>
-  }
+  <div *ngIf="profileEditMode">
+    <input type="email" [(ngModel)]="user.email" placeholder="{{ user.email }}" />
+  </div>
+  <div *ngIf="!profileEditMode">
+    <span>{{ user.email }}</span>
+  </div>
+
   <label>Phone</label>
-  @if (profileEditMode){
-    <input type="tel" placeholder="{{user.phone}}" />
-  }@else{
-    <span>{{user.phone}}</span>
-  }
+  <div *ngIf="profileEditMode">
+    <input type="tel" [(ngModel)]="user.phone" placeholder="{{ user.phone }}" />
+  </div>
+  <div *ngIf="!profileEditMode">
+    <span>{{ user.phone }}</span>
+  </div>
+
+  <div *ngIf="errorMessage" class="error-message">
+    <p>{{ errorMessage }}</p>
+  </div>
+
   <div class="buttons">
     <button [class.toggled]="profileEditMode" (click)="toggleProfileEditMode()">
       <fa-icon *ngIf="profileEditMode" [icon]="faX" />
       <fa-icon *ngIf="!profileEditMode" [icon]="faPencil" />
-      {{profileEditMode ? 'Cancel' : 'Edit'}}
+      {{ profileEditMode ? 'Cancel' : 'Edit' }}
     </button>
-    @if(profileEditMode){
-      <button>
-        <fa-icon [icon]="faSave" />
-        Save
-      </button>
-    }
+    <button *ngIf="profileEditMode" (click)="saveProfileChanges()">
+      <fa-icon [icon]="faSave" />
+      Save
+    </button>
   </div>
 </div>

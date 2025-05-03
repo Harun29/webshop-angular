@@ -35,9 +35,9 @@ export class CheckoutComponent {
   addresses: Address[] = [];
 
   ngOnInit() {
-    this.userService.getAddresses().subscribe((data) => {
-      this.addresses = data;
-    })
+  //  this.userService.getAddresses().subscribe((data) => {
+    //  this.addresses = data;
+    //})
   }
 
   cartService = inject(CartService);

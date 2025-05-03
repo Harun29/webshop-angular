@@ -1,48 +1,67 @@
 import { Injectable, Inject, PLATFORM_ID } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Observable, tap, of } from 'rxjs';
+import { Observable, tap } from 'rxjs';
 import { isPlatformBrowser } from '@angular/common';
-import { LoginRequest, LoginResponseDto, RegisterRequest } from '../models/auth.model';
+import { LoginRequest, RegisterRequest } from '../models/auth.model';
 import { UserDto } from '../models/user.model';
+import { environment } from '../../environments/environment';
+import { CookieService } from 'ngx-cookie-service';
 
 @Injectable({ providedIn: 'root' })
 export class AuthService {
-  private readonly LOGIN_URL = '/auth/login';
-  private readonly REGISTER_URL = '/auth/register';
+  private readonly LOGIN_URL = `${environment.apiUrl}/auth/login`;
+  private readonly REGISTER_URL = `${environment.apiUrl}/auth/register`;
+  private readonly USER_STORAGE_KEY = 'currentUser';
 
-  constructor(private http: HttpClient, @Inject(PLATFORM_ID) private platformId: Object) {}
+  constructor(
+    private http: HttpClient,
+    @Inject(PLATFORM_ID) private platformId: Object,
+    private cookieService: CookieService
+  ) {}
 
-  login(payload: LoginRequest): Observable<LoginResponseDto> {
-    return this.http.post<LoginResponseDto>(this.LOGIN_URL, payload).pipe(
-      tap(response => {
-        if (isPlatformBrowser(this.platformId)) {
-          sessionStorage.setItem('token', response.token);
-          sessionStorage.setItem('user', JSON.stringify(response.user));
-        }
-      })
-    );
+login(payload: LoginRequest): Observable<UserDto> {
+  return this.http.post<UserDto>(this.LOGIN_URL, payload, { withCredentials: true }).pipe(
+    tap(user => {
+      localStorage.setItem('currentUser', JSON.stringify(user));
+      // No token available in JS, but browser cookie will be set if CORS/setup is correct
+    })
+  );
+}
+
+  logout(): void {
+    if (isPlatformBrowser(this.platformId)) {
+
+      this.cookieService.delete('token', '/');
+
+      localStorage.removeItem(this.USER_STORAGE_KEY);
+    }
+  }
+
+  getCurrentUser(): UserDto | null {
+    if (isPlatformBrowser(this.platformId)) {
+      const userString = localStorage.getItem('currentUser');
+      try {
+        return userString ? JSON.parse(userString) : null;
+      } catch (err) {
+        console.error('Failed to parse user from localStorage', err, userString);
+        return null;
+      }
+    }
+    return null;
+  }
+
+  getToken(): string | null {
+    return isPlatformBrowser(this.platformId) ? this.cookieService.get('token') : null;
   }
 
   register(payload: RegisterRequest): Observable<UserDto> {
     return this.http.post<UserDto>(this.REGISTER_URL, payload);
   }
 
-  logout(): void {
+  // Call this after user updates profile
+  updateCurrentUser(newUser: UserDto) {
     if (isPlatformBrowser(this.platformId)) {
-      sessionStorage.removeItem('token');
-      sessionStorage.removeItem('user');
+      localStorage.setItem('currentUser', JSON.stringify(newUser));
     }
-  }
-
-  getCurrentUser(): Observable<UserDto | null> {
-    if (isPlatformBrowser(this.platformId)) {
-      const user = sessionStorage.getItem('user');
-      return of(user ? (JSON.parse(user) as UserDto) : null);
-    }
-    return of(null);
-  }
-
-  getToken(): string | null {
-    return isPlatformBrowser(this.platformId) ? sessionStorage.getItem('token') : null;
   }
 }
