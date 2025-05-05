@@ -61,7 +61,7 @@ export class ProfileComponent implements OnInit {
       next: (user) => {
         this.user = user;
         this.addresses = user.addresses ?? [];
-        localStorage.setItem('user', JSON.stringify(user)); // optional cache
+        localStorage.setItem('user', JSON.stringify(user));
         console.log('User data loaded from API:', this.user);
       },
       error: () => {

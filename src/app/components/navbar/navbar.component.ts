@@ -9,7 +9,6 @@ import {RouterLink} from '@angular/router';
 import {faHouse} from '@fortawesome/free-solid-svg-icons/faHouse';
 import {faUser} from '@fortawesome/free-solid-svg-icons/faUser';
 import {pages} from '../../models/pages.model';
-import {faSignOutAlt} from '@fortawesome/free-solid-svg-icons';
 import {AuthService} from '../../services/auth.service';
 
 @Component({
@@ -28,7 +27,6 @@ import {AuthService} from '../../services/auth.service';
 export class NavbarComponent {
 
   protected readonly pages = pages;
-  protected readonly faSignOutAlt = faSignOutAlt;
 
   isVisible = signal(false);
   isDesktop = signal(false);

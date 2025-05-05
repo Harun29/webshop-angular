@@ -9,9 +9,6 @@
     <div class="navigate-icon" (click)="togglePage(pages.PROFILE)" [class.active]="selectedPage() === pages.PROFILE">
       <fa-icon [icon]="faUser" />
     </div>
-    <div class="navigate-icon logout-icon" (click)="logout()">
-      <fa-icon [icon]="faSignOutAlt" />
-    </div>
   </div>
   <div class="swipe-gesture" *ngIf="isExpanded() && !isDesktop()"></div>
   <span class="cart-header" *ngIf="isExpanded() && !isDesktop()">Cart</span>
