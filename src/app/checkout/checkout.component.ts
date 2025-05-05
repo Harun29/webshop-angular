@@ -10,6 +10,7 @@ import {faCircleCheck} from '@fortawesome/free-solid-svg-icons/faCircleCheck';
 import {CheckoutPaymentComponent} from '../components/checkout-payment/checkout-payment.component';
 import {UserService} from '../services/user.service';
 import {Address} from '../models/address.model';
+import {AddressService} from '../services/address.service';
 
 @Component({
   selector: 'app-checkout',
@@ -35,12 +36,13 @@ export class CheckoutComponent {
   addresses: Address[] = [];
 
   ngOnInit() {
-  //  this.userService.getAddresses().subscribe((data) => {
-    //  this.addresses = data;
-    //})
+    this.addressService.getAddresses().subscribe((data) => {
+      this.addresses = data;
+    })
   }
 
   cartService = inject(CartService);
+  addressService = inject(AddressService);
   totalPrice = this.cartService.totalPrice;
   cartItems = this.cartService.cartItems;
 
