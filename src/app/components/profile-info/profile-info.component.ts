@@ -5,6 +5,12 @@ import {FaIconComponent} from '@fortawesome/angular-fontawesome';
 import {faPencil, faSave, faX} from '@fortawesome/free-solid-svg-icons';
 import {FormsModule} from '@angular/forms';
 import {NgIf} from '@angular/common';
+import {Router} from '@angular/router';
+import { MatDialog, MatDialogModule } from '@angular/material/dialog';
+import { MatButtonModule } from '@angular/material/button';
+import {AuthService} from '../../services/auth.service';
+import {ConfirmDialogComponent} from '../../shared/confirm-dialog/confirm-dialog.component';
+import {faTrash} from '@fortawesome/free-solid-svg-icons/faTrash';
 
 @Component({
   selector: 'app-profile-info',
@@ -12,12 +18,15 @@ import {NgIf} from '@angular/common';
   imports: [
     FaIconComponent,
     FormsModule,
+    MatDialogModule,
+    MatButtonModule,
     NgIf
   ],
   templateUrl: './profile-info.component.html',
   styleUrl: './profile-info.component.scss'
 })
 export class ProfileInfoComponent implements OnChanges{
+
   protected readonly faX = faX;
   protected readonly faSave = faSave;
   protected readonly faPencil = faPencil;
@@ -28,7 +37,7 @@ export class ProfileInfoComponent implements OnChanges{
   @Input() user!: UserDto;
   @Output() userUpdated = new EventEmitter<UserDto>();
 
-  constructor(private userService: UserService) {}
+  constructor(private userService: UserService, private router: Router, private dialog: MatDialog, private authService: AuthService) {}
 
   ngOnChanges(changes: SimpleChanges) {
     if (changes['user']) {
@@ -66,6 +75,23 @@ export class ProfileInfoComponent implements OnChanges{
     }
   }
 
+  deactivateAccount(): void {
+    const dialogRef = this.dialog.open(ConfirmDialogComponent);
+
+    dialogRef.afterClosed().subscribe((confirmed: boolean) => {
+      if (confirmed && this.user?.id) {
+        this.userService.deleteUser(this.user.id).subscribe({
+          next: () => {
+            this.authService.logout();
+            this.router.navigate(['/login']);
+          },
+          error: () => {
+            this.errorMessage = 'Failed to delete account.';
+          },
+        });
+      }
+    });
+  }
 
   extractErrorMessage(error: any): string {
     if (error && error.error && error.error.details) {
@@ -74,4 +100,5 @@ export class ProfileInfoComponent implements OnChanges{
     return 'An unknown error occurred. Please try again later.';
   }
 
+  protected readonly faTrash = faTrash;
 }

@@ -23,7 +23,6 @@ login(payload: LoginRequest): Observable<UserDto> {
   return this.http.post<UserDto>(this.LOGIN_URL, payload, { withCredentials: true }).pipe(
     tap(user => {
       localStorage.setItem('currentUser', JSON.stringify(user));
-      // No token available in JS, but browser cookie will be set if CORS/setup is correct
     })
   );
 }

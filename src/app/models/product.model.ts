@@ -4,6 +4,7 @@ export type ProductDto = {
   price: number;
   imageUrl: string;
   category: string;
+  description: string;
 };
 
 export type ProductRequestDto = {

@@ -9,6 +9,9 @@
     <div class="navigate-icon" (click)="togglePage(pages.PROFILE)" [class.active]="selectedPage() === pages.PROFILE">
       <fa-icon [icon]="faUser" />
     </div>
+    <div class="navigate-icon logout-icon" (click)="logout()">
+      <fa-icon [icon]="faSignOutAlt" />
+    </div>
   </div>
   <div class="swipe-gesture" *ngIf="isExpanded() && !isDesktop()"></div>
   <span class="cart-header" *ngIf="isExpanded() && !isDesktop()">Cart</span>
@@ -34,7 +37,7 @@
   </div>
 </div>
 <div *ngIf="isDesktop()" class="cart-container" (click)="!isExpanded() ? toggleCart() : resetOverflow()" [routerLink]="isExpanded() ? '/checkout' : null">
-    <fa-icon [icon]="faCartShopping"></fa-icon>
+  <fa-icon [icon]="faCartShopping"></fa-icon>
 </div>
 <div class="desktop-cart" *ngIf="isExpanded() && isDesktop()">
   <span class="cart-header">Cart</span>

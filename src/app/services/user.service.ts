@@ -16,15 +16,18 @@ export class UserService {
   constructor(private http: HttpClient, @Inject(PLATFORM_ID) private platformId: Object) {}
 
   updateUser(id: number, user: UserDto): Observable<UserDto> {
-    return this.http.put<{ user: UserDto }>(`${this.apiUrl}/${id}`, user, { withCredentials: true })
+    return this.http.put<{ user: UserDto }>(`${this.apiUrl}/${id}`, user)
       .pipe(map(response => response.user));
   }
 
   getCurrentUser(): Observable<UserDto> {
     return this.http.get<{ user: UserDto }>(
       `${this.apiUrl}/me`,
-      { withCredentials: true }
     ).pipe(map(res => res.user));
+  }
+
+  deleteUser(id: number): Observable<void> {
+    return this.http.delete<void>(`${this.apiUrl}/${id}`);
   }
 
 

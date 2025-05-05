@@ -1,12 +1,12 @@
-import {Component, inject, signal} from '@angular/core';
-import {ShopItemsListComponent} from '../components/shop-items-list/shop-items-list.component';
-import {Item} from '../models/item.model';
-import { ItemsService } from '../services/items.service';
-import {catchError} from 'rxjs';
-import {FooterComponent} from '../components/footer/footer.component';
-import {NavbarComponent} from '../components/navbar/navbar.component';
-import {pages} from '../models/pages.model';
-import {ProfileComponent} from '../components/profile/profile.component';
+import { Component, inject, signal } from '@angular/core';
+import { ShopItemsListComponent } from '../components/shop-items-list/shop-items-list.component';
+import { Item } from '../models/item.model'; // This is your frontend model
+import { ProductService } from '../services/product.service'; // Updated import
+import { catchError } from 'rxjs';
+import { FooterComponent } from '../components/footer/footer.component';
+import { NavbarComponent } from '../components/navbar/navbar.component';
+import { pages } from '../models/pages.model';
+import { ProfileComponent } from '../components/profile/profile.component';
 
 @Component({
   selector: 'app-home',
@@ -20,21 +20,27 @@ import {ProfileComponent} from '../components/profile/profile.component';
   styleUrl: './home.component.scss'
 })
 export class HomeComponent {
-
   shopItems = signal<Array<Item>>([]);
   selectedPage = signal<pages>(pages.HOME);
-  private readonly itemsService = inject(ItemsService);
+  private readonly productService = inject(ProductService);
   protected readonly pages = pages;
 
   ngOnInit() {
-    this.itemsService.getItemsFromApi()
+    this.productService.getAllProducts()
       .pipe(
         catchError((err) => {
           console.log(err);
           throw err;
         })
       )
-      .subscribe((items) => {
+      .subscribe((products) => {
+        const items: Item[] = products.map(product => ({
+          id: product.id.toString(),
+          name: product.name,
+          price: product.price,
+          image: product.imageUrl,
+          description: product.description
+        }));
         this.shopItems.set(items);
       });
   }
@@ -43,5 +49,4 @@ export class HomeComponent {
     this.selectedPage.set(page);
     console.log(`Selected page: ${page}`);
   }
-
 }

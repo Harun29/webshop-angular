@@ -42,9 +42,16 @@
       <fa-icon *ngIf="!profileEditMode" [icon]="faPencil" />
       {{ profileEditMode ? 'Cancel' : 'Edit' }}
     </button>
+
     <button *ngIf="profileEditMode" (click)="saveProfileChanges()">
       <fa-icon [icon]="faSave" />
       Save
     </button>
+
+    <button *ngIf="!profileEditMode" class="danger" (click)="deactivateAccount()">
+      <fa-icon [icon]="faTrash" />
+      Delete Account
+    </button>
+
   </div>
 </div>

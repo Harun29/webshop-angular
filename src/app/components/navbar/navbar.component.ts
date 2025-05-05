@@ -9,6 +9,8 @@ import {RouterLink} from '@angular/router';
 import {faHouse} from '@fortawesome/free-solid-svg-icons/faHouse';
 import {faUser} from '@fortawesome/free-solid-svg-icons/faUser';
 import {pages} from '../../models/pages.model';
+import {faSignOutAlt} from '@fortawesome/free-solid-svg-icons';
+import {AuthService} from '../../services/auth.service';
 
 @Component({
   selector: 'app-navbar',
@@ -26,6 +28,7 @@ import {pages} from '../../models/pages.model';
 export class NavbarComponent {
 
   protected readonly pages = pages;
+  protected readonly faSignOutAlt = faSignOutAlt;
 
   isVisible = signal(false);
   isDesktop = signal(false);
@@ -41,7 +44,7 @@ export class NavbarComponent {
   protected readonly faHouse = faHouse;
   protected readonly faUser = faUser;
 
-  constructor(@Inject(PLATFORM_ID) private platformId: Object) {
+  constructor(@Inject(PLATFORM_ID) private platformId: Object, private authService: AuthService) {
     if(isPlatformBrowser(this.platformId)) {
       this.isDesktop.update(() => window.screen.width > 1024);
       this.isVisible.update(() => window.screen.width > 1024);
@@ -77,5 +80,9 @@ export class NavbarComponent {
   togglePage(page: pages) {
     this.selectedPage.set(page);
     this.pageToggled.emit(page);
+  }
+
+  logout() {
+    this.authService.logout();
   }
 }
