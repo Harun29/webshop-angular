@@ -79,8 +79,4 @@ export class NavbarComponent {
     this.selectedPage.set(page);
     this.pageToggled.emit(page);
   }
-
-  logout() {
-    this.authService.logout();
-  }
 }
