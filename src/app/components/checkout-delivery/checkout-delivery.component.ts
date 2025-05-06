@@ -1,4 +1,4 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {faPlus} from '@fortawesome/free-solid-svg-icons/faPlus';
 import {FaIconComponent} from '@fortawesome/angular-fontawesome';
 import {faCheckCircle} from '@fortawesome/free-solid-svg-icons/faCheckCircle';
@@ -25,6 +25,8 @@ export class CheckoutDeliveryComponent implements OnInit {
   @Input() addresses!: Address[];
   @Input() items!: CartItem[];
 
+  @Output() selectedAddressChange = new EventEmitter<Address>();
+
   ngOnInit(): void {
     if (this.addresses && this.addresses.length > 0) {
       this.selectedAddress = this.addresses[0];
@@ -33,5 +35,6 @@ export class CheckoutDeliveryComponent implements OnInit {
 
   setSelectAddress(address: Address) {
     this.selectedAddress = address;
+    this.selectedAddressChange.emit(address);
   }
 }

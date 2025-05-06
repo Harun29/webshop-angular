@@ -63,22 +63,24 @@
   }
 }
 
-button.danger {
+.profile-info .buttons button.danger {
   background: #fe3c3c;
   color: white;
   border: none;
   padding: 8px 16px;
   font-weight: bold;
-  border-radius: 4px;
+  border-radius: 8px;
   cursor: pointer;
   display: flex;
   align-items: center;
   gap: 6px;
   transition: background 0.3s;
   justify-content: center;
+  box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.15);
 }
 
-button.danger:hover {
-  background-color: #c62828;
+.profile-info button.danger:hover {
+  background-color: #e53935;
 }
+
 

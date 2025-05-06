@@ -20,28 +20,56 @@
     </div>
   </header>
 
-  <main>
-    @if (isOnDelivery()){
-      <app-checkout-delivery [items]="cartItems()" [addresses]="addresses"/>
-    }@else{
-      <app-checkout-payment />
-    }
-  </main>
 
-  <footer>
-    <div class="total">
-      Total:
-      <span>${{totalPrice().toFixed(2)}}</span>
+  @if (orderSuccess()) {
+    <div class="success-message">
+      <fa-icon [icon]="faCircleCheck" class="success-icon" />
+      <span>Your order has been placed successfully!</span>
     </div>
-    <button (click)="changeToPayment()" [class.payment]="isOnPayment()">
-      @if (isOnDelivery()){
-        Confirm
-        <fa-icon [icon]="faCheck" />
-      }@else{
-        Proceed
+
+    <div class="success-actions">
+      <button routerLink="/" class="go-home">
+        <fa-icon [icon]="faArrowLeft" />
+        Continue Shopping
+      </button>
+      <button routerLink="/" class="go-orders">
         <fa-icon [icon]="faArrowRight" />
+        View My Orders
+      </button>
+    </div>
+  }
+
+
+  @if (!orderSuccess()) {
+    <main>
+      @if (isOnDelivery()) {
+        <app-checkout-delivery
+          [items]="cartItems()"
+          [addresses]="addresses"
+          (selectedAddressChange)="shippingAddress = $event"
+        />
+      } @else {
+        <app-checkout-payment (paymentMethodChange)="paymentMethod = $event" />
       }
-    </button>
-  </footer>
+    </main>
+
+    <footer>
+      <div class="total">
+        Total:
+        <span>${{ totalPrice().toFixed(2) }}</span>
+      </div>
+      <button (click)="onProceedClick()" [class.payment]="isOnPayment()">
+        @if (isOnDelivery()) {
+          Confirm
+          <fa-icon [icon]="faCheck" />
+        } @else {
+          Proceed
+          <fa-icon [icon]="faArrowRight" />
+        }
+      </button>
+    </footer>
+  }
+
+
 
 </div>

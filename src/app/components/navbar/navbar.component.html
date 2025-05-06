@@ -23,8 +23,9 @@
       <span>+ $12</span>
     </div>
   </div>
-  <div *ngIf="!isDesktop()" class="cart-container" [class.expanded]="isExpanded()" (click)="!isExpanded() ? toggleCart() : resetOverflow()" [routerLink]="isExpanded() ? '/checkout' : null">
-    @if (isExpanded()) {
+  <div *ngIf="!isDesktop()" class="cart-container" [class.expanded]="isExpanded()"
+       (click)="!isExpanded() ? toggleCart() : (cartItems().length > 0 && navigateToCheckout())">
+  @if (isExpanded()) {
       <span>Checkout
        <fa-icon [icon]="faArrowRight"></fa-icon>
       </span>
@@ -49,9 +50,9 @@
       <span>+ $12</span>
     </div>
   </div>
-  <div class="cart-container expanded" (click)="!isExpanded() ? toggleCart() : resetOverflow()" [routerLink]="isExpanded() ? '/checkout' : null">
-      <span>Checkout
-       <fa-icon [icon]="faArrowRight"></fa-icon>
-      </span>
+  <div class="cart-container expanded" (click)="!isExpanded() ? toggleCart() : (cartItems().length > 0 && navigateToCheckout())">
+  <span>Checkout
+    <fa-icon [icon]="faArrowRight"></fa-icon>
+  </span>
   </div>
 </div>
