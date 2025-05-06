@@ -1,4 +1,4 @@
-import {Component, signal} from '@angular/core';
+import {Component, EventEmitter, Output, signal} from '@angular/core';
 import {FaIconComponent} from "@fortawesome/angular-fontawesome";
 import {faCircle} from '@fortawesome/free-solid-svg-icons/faCircle';
 import {faCircleCheck} from '@fortawesome/free-solid-svg-icons/faCircleCheck';
@@ -29,9 +29,11 @@ export class CheckoutPaymentComponent {
   public PaymentMethod = PaymentMethod;
 
   selectedPaymentMethod = signal(PaymentMethod.CreditCard)
+  @Output() paymentMethodChange = new EventEmitter<string>();
 
   changePaymentMethod(method: PaymentMethod) {
     this.selectedPaymentMethod.set(method);
+    this.paymentMethodChange.emit(PaymentMethod[method]);
   }
 }
 

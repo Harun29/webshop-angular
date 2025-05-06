@@ -1,4 +1,5 @@
 import {ProductDto} from './product.model';
+import {AddressDto, AddressRequestDto} from './address.model';
 
 export type OrderDto = {
   id: number;
@@ -8,9 +9,13 @@ export type OrderDto = {
   createdAt: string;
 };
 
-export type OrderRequest = {
-  productId: number;
-  quantity: number;
-  shippingAddress: string;
+export interface OrderRequest {
+  items: {
+    productId: number;
+    quantity: number;
+  }[];
+  addressId: number;
   paymentMethod: string;
-};
+}
+
+

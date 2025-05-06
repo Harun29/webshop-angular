@@ -10,6 +10,7 @@ import {faHouse} from '@fortawesome/free-solid-svg-icons/faHouse';
 import {faUser} from '@fortawesome/free-solid-svg-icons/faUser';
 import {pages} from '../../models/pages.model';
 import {AuthService} from '../../services/auth.service';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-navbar',
@@ -42,7 +43,7 @@ export class NavbarComponent {
   protected readonly faHouse = faHouse;
   protected readonly faUser = faUser;
 
-  constructor(@Inject(PLATFORM_ID) private platformId: Object, private authService: AuthService) {
+  constructor(@Inject(PLATFORM_ID) private platformId: Object, private authService: AuthService, private router: Router) {
     if(isPlatformBrowser(this.platformId)) {
       this.isDesktop.update(() => window.screen.width > 1024);
       this.isVisible.update(() => window.screen.width > 1024);
@@ -83,4 +84,11 @@ export class NavbarComponent {
   logout() {
     this.authService.logout();
   }
+
+  navigateToCheckout() {
+    this.resetOverflow();
+    this.isExpanded.set(false);
+    this.router.navigate(['/checkout']);
+  }
+
 }
