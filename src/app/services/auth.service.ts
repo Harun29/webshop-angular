@@ -19,20 +19,24 @@ export class AuthService {
     private cookieService: CookieService
   ) {}
 
-login(payload: LoginRequest): Observable<UserDto> {
-  return this.http.post<UserDto>(this.LOGIN_URL, payload, { withCredentials: true }).pipe(
-    tap(user => {
-      localStorage.setItem('currentUser', JSON.stringify(user));
-    })
-  );
-}
+  login(payload: LoginRequest): Observable<UserDto> {
+    return this.http.post<UserDto>(this.LOGIN_URL, payload, { withCredentials: true }).pipe(
+      tap(user => {
+        localStorage.setItem('currentUser', JSON.stringify(user));
+      })
+    );
+  }
 
   logout(): void {
     if (isPlatformBrowser(this.platformId)) {
-
-      this.cookieService.delete('token', '/');
-
-      localStorage.removeItem(this.USER_STORAGE_KEY);
+      try {
+        this.http.post(`${environment.apiUrl}/auth/logout`, {}, { withCredentials: true }).subscribe();
+        this.cookieService.delete('token', '/');
+        this.cookieService.delete('refreshToken', '/');
+        localStorage.removeItem(this.USER_STORAGE_KEY);
+      } catch (e) {
+        console.error('Error deleting cookies:', e);
+      }
     }
   }
 
