@@ -81,14 +81,9 @@ export class NavbarComponent {
     this.pageToggled.emit(page);
   }
 
-  logout() {
-    this.authService.logout();
-  }
-
   navigateToCheckout() {
     this.resetOverflow();
     this.isExpanded.set(false);
     this.router.navigate(['/checkout']);
   }
-
 }

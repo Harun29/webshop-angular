@@ -11,6 +11,7 @@ import {CommonModule, isPlatformBrowser, NgIf} from '@angular/common';
 import { Router } from '@angular/router';
 import { AuthService } from '../../services/auth.service';
 import {UserService} from '../../services/user.service';
+import {faRightFromBracket} from '@fortawesome/free-solid-svg-icons/faRightFromBracket';
 
 enum tabs {
   info,
@@ -75,4 +76,9 @@ export class ProfileComponent implements OnInit {
     localStorage.setItem('user', JSON.stringify(updatedUser));
   }
 
+  logout() {
+    this.authService.logout();
+  }
+
+  protected readonly faRightFromBracket = faRightFromBracket;
 }
