@@ -1,12 +1,12 @@
 .checkout-payment{
   display: grid;
-  padding: 1rem 0 1rem 1rem;
+  padding: 16px 0 16px 16px;
   grid-template-rows: auto auto auto 1fr;
 
   .payment-section{
     font-size: 1.2rem;
     font-weight: 500;
-    margin-bottom: 1rem;
+    margin-bottom: 16px;
   }
 
   .payment-methods{
@@ -19,7 +19,7 @@
       display: flex;
       align-items: center;
       justify-content: space-between;
-      padding: 0 2rem;
+      padding: 0 32px;
       border-bottom: 2px solid #e4e4e4;
 
 

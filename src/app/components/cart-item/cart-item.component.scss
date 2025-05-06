@@ -1,10 +1,10 @@
 .cart-item {
-  margin-bottom: 2rem;
+  margin-bottom: 32px;
   //height: 120px;
   width: 100%;
   display: grid;
   grid-template-columns: 1fr 2fr auto;
-  gap: 1rem;
+  gap: 16px;
   align-items: center;
 
   .cart-item-image {
@@ -34,7 +34,7 @@
     .cart-item-price {
       font-size: 1.1rem;
       color: #666;
-      margin: 0.25rem 0 0;
+      margin: 4px 0 0;
 
       span {
         color: #777;
