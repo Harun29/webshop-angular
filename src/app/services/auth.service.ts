@@ -36,19 +36,6 @@ login(payload: LoginRequest): Observable<UserDto> {
     }
   }
 
-  getCurrentUser(): UserDto | null {
-    if (isPlatformBrowser(this.platformId)) {
-      const userString = localStorage.getItem('currentUser');
-      try {
-        return userString ? JSON.parse(userString) : null;
-      } catch (err) {
-        console.error('Failed to parse user from localStorage', err, userString);
-        return null;
-      }
-    }
-    return null;
-  }
-
   getToken(): string | null {
     return isPlatformBrowser(this.platformId) ? this.cookieService.get('token') : null;
   }
