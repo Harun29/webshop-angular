@@ -52,11 +52,15 @@ export class LoginComponent {
   }
 
   onRegister() {
+    this.loginData = {
+      username: this.registerData.username,
+      password: this.registerData.password
+    }
     this.authService.register(this.registerData).subscribe({
       next: (res: any) => {
         localStorage.clear();
         console.log('Registration successful', res);
-        this.route.navigateByUrl('/login');
+        this.onLogin()
       },
       error: (err) => {
         console.error('Registration failed', err);

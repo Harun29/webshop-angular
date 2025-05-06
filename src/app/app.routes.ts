@@ -16,6 +16,7 @@ export const routes: Routes = [
   {
     path: 'login',
     pathMatch: 'full',
+    canActivate: [authGuard],
     loadComponent: () => import('./login/login.component').then(m => m.LoginComponent),
   },
 ];
