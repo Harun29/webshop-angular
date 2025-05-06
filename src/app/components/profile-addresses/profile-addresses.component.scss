@@ -1,21 +1,21 @@
 .addresses{
-  border-radius: 1rem;
+  border-radius: 16px;
   background: #FFF;
   box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.15);
   width: calc(100% - 2rem);
   min-height: 400px;
   display: flex;
   flex-direction: column;
-  gap: 16px;
   padding: 32px 16px 32px 16px;
   overflow-y: scroll;
   position: relative;
 
   &.editToggled{
-  padding-bottom: 96px!important;
+    padding-bottom: 96px!important;
   }
 
   .address{
+    margin-bottom: 16px;
     padding: 10px;
     border-radius: 10px;
     -webkit-box-shadow: 10px 14px 16px -14px rgba(0,0,0,0.54);
@@ -58,6 +58,7 @@
   }
 
   input {
+    margin-bottom: 16px;
     background-color: #F4F7FF;
     border: none;
     padding: 16px;
